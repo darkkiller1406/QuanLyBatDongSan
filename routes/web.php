@@ -1,0 +1,98 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+// page bán
+Route::get('trangchu','TrangChuController@getView_Ban')->name('view_trangchu');
+
+Route::get('chitiet/{id}','ChiTietController@getView')->name('view_chitiet');
+
+Route::get('chitietphong/{id}','ChiTietController@getViewRoom')->name('view_chitiet');
+
+Route::get('danhsachdat','QL_DatController@getView_DSDat')->name('view_dsDat');
+
+Route::get('lienlac','TrangChuController@getView_lienlac')->name('view_lienlac');
+
+Route::get('vechungtoi','TrangChuController@getView_vechungtoi')->name('view_vechungtoi');
+
+Route::any('timdat_ban', 'QL_DatController@timDat_ban')->name('timDat_ban');
+
+Route::post('guiyeucau', 'QL_YeuCauController@ThemYeuCau')->name('ThemYeuCau');
+
+Route::post('guiyeucaull', 'QL_YeuCauController@ThemYeuCauLL')->name('ThemYeuCauLL');
+
+Route::get('dangky', 'QL_DangNhapController@getViewDK')->name('DangKy');
+
+Route::post('postdangky', 'QL_DangNhapController@postDK')->name('postDangKy');
+
+Route::post('dangnhap', 'QL_DangNhapController@getDN');
+
+Route::get('dangxuat', 'QL_DangNhapController@getDX');
+
+Route::get('danhsachphong','QL_ChoThueController@getView' )->name('view_dsPhong');
+
+Route::get('dangtin','QL_ChoThueController@getViewDangTin' )->name('view_dangtin');
+
+Route::any('postdangtin', 'QL_ChoThueController@postDangTin');
+
+Route::any('timquan','QL_DatController@timQuan');
+
+Route::any('timphuong','QL_DatController@timPhuong');
+
+Route::any('timphong', 'QL_ChoThueController@timPhong')->name('timPhong');
+// page admin
+Route::get('page/dangnhap', 'QL_DangNhapController@getView');
+Route::post('page/dangnhap', 'QL_DangNhapController@getDangNhap');
+Route::get('page/dangxuat', 'QL_DangNhapController@getDangXuat');
+Route::group(['prefix' => 'page','middleware'=>'Adminlogin'], function() {
+    
+    Route::get('index','TrangChuController@getIndex')->name('index');
+
+    //quản lý khách hàng
+    Route::get('quanlykhachhang','QL_KhachHangController@getView')->name('view_QLKH');
+    Route::post('themkhachhang','QL_KhachHangController@postThemKhachHang')->name('post_ThemKH');
+    Route::post('suakhachhang','QL_KhachHangController@postSuaKhachHang')->name('post_SuaKH');
+    Route::get('xoakh/{id}','QL_KhachHangController@getXoa');
+    Route::any('timkh', 'QL_KhachHangController@getTim');
+    //quản lý tài khoản
+    Route::get('quanlytaikhoan','QL_TaiKhoanController@getView')->name('view_QLTK');
+    Route::post('themtaikhoan','QL_TaiKhoanController@postThemTaiKhoan')->name('post_ThemTK');
+    Route::get('resettk/{id}','QL_TaiKhoanController@getReset');
+    Route::get('xoatk/{id}','QL_TaiKhoanController@getXoa');
+    Route::any('timtk', 'QL_TaiKhoanController@getTim');
+    //
+    Route::get('doimatkhau', 'QL_TaiKhoanController@getViewSuaMK')->name('view_SuaMK');
+    Route::any('suamk','QL_TaiKhoanController@postSuaMK')->name('post_SuaMK');
+    //quản lý đất
+    Route::get('quanlydat','QL_DatController@getView')->name('view_QLDAT');
+    Route::post('themdat','QL_DatController@postThem')->name('post_ThemDAT');
+    Route::post('suadat','QL_DatController@postSua')->name('post_SuaDAT');;
+    Route::get('xoadat/{id}','QL_DatController@getXoa');
+    Route::any('timdat', 'QL_DatController@getTim');
+    //quản lý hợp đồng
+    Route::get('quanlyhopdong','QL_HopDongController@getView')->name('view_QLHD');
+    Route::post('themhd','QL_HopDongController@postThem')->name('post_ThemHD');
+    Route::get('xoahd/{id}','QL_HopDongController@getXoa');
+    Route::any('timhd', 'QL_HopDongController@getTim');
+    //Quan ly yeu cau
+    Route::get('quanlyyeucau','QL_YeuCauController@getView')->name('view_QLYC');
+    Route::get('xoayc/{id}','QL_YeuCauController@getXoa');
+    Route::get('xoaycll/{id}','QL_YeuCauController@getXoaLL');
+    Route::any('timyeucau', 'QL_YeuCauController@timYC')->name('TKYC');
+    Route::any('guimail','QL_YeuCauController@guiMail');
+    //
+     Route::any('thongkedoanhthu','ThongKeController@getThongKeDoanhThu')->name('TKDT');
+
+ });
