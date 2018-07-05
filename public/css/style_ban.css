@@ -336,6 +336,9 @@ a, a:hover{
 .btn-detail{ background: #3c3c3c;border:1px solid #3c3c3c;width: 100%;border-radius: 2px;margin-top: 10px;color:#FFD700}
 .btn-detail:hover{ background: #fff;border:1px solid #3c3c3c;width: 100%;border-radius: 2px;margin-top: 10px;color: #272727}
 .btn-detail:focus{ background: #3c3c3c;border:1px solid #3c3c3c;width: 100%;border-radius: 2px;margin-top: 10px;color:#FFD700}
+.btn-basic{ background: #BBBBBB;border:1px solid #AAAAAA;width: 100%;border-radius: 2px;margin-top: 10px;color:#000}
+.btn-basic:hover{ background: #fff;border:1px solid #AAAAAA;width: 100%;border-radius: 2px;margin-top: 10px;color: #272727}
+.btn-basic:focus{ background: #BBBBBB;border:1px solid #AAAAAA;width: 100%;border-radius: 2px;margin-top: 10px;color:#000}
 .sub-menu {
   display: none;
   position: absolute;

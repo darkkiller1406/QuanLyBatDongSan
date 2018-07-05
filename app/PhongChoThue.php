@@ -103,4 +103,16 @@ class PhongChoThue extends Model
             return $k;
         }
     }
+    public function getTinDang($tg)
+    {
+        if(isset($tg)){
+            return DB::select("SELECT *,LoaiTin.LoaiTin as loaitin,LoaiChoThue.LoaiChoThue as loaichothue,PhongThue.created_at as ngaydang,PhongThue.updated_at as ngaycapnhat  FROM PhongThue,ThanhPho,Quan,Phuong,LoaiChoThue,LoaiTin,users WHERE phongthue.created_at like '%".$tg."%' and PhongThue.phuong = Phuong.id and Phuong.ThuocQuan = Quan.id and Quan.ThuocThanhPho = ThanhPho.id and PhongThue.loaichothue = LoaiChoThue.id and PhongThue.LoaiTin = LoaiTin.id and users.id = PhongThue.NguoiDang");
+        }
+    }
+    public function TimTin($name)
+    {
+        if(isset($name)){
+            return DB::select("SELECT *,LoaiTin.LoaiTin as loaitin,LoaiChoThue.LoaiChoThue as loaichothue, PhongThue.created_at as ngaydang FROM PhongThue,ThanhPho,Quan,Phuong,LoaiChoThue,LoaiTin,users WHERE phongthue.nguoidang = '".$name."' and PhongThue.phuong = Phuong.id and Phuong.ThuocQuan = Quan.id and Quan.ThuocThanhPho = ThanhPho.id and PhongThue.loaichothue = LoaiChoThue.id and PhongThue.LoaiTin = LoaiTin.id and users.id = PhongThue.NguoiDang");
+        }
+    }
 }

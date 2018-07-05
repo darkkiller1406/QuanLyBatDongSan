@@ -84,10 +84,10 @@ class QL_DangNhapConTroller extends Controller
     }
     public function postDK(Request $request)
     {
-        $this->validate($request,[
+         $this->validate($request,[
             'name'=> 'required|min:3|unique:users,name',
             'email'=>'required|email|unique:users,email',
-            'password'=> 'required|min:3|max:32',
+            'password'=> 'required|digits_between:6,20',
             'passwordAgain'=>'required|same:password'
         ],[
             'name.required'=> 'Bạn chưa nhập tên người dùng',
@@ -95,9 +95,9 @@ class QL_DangNhapConTroller extends Controller
             'email.required'=> 'Bạn chưa nhập email',
             'email.email'=> 'Bạn chưa nhập đúng định dạng email',
             'email.unique'=>'Email đã tồn tại',
+            'name.unique'=>'Tên đăng nhập đã tồn tại',
             'password.required'=> 'Bạn chưa nhập mật khẩu',
-            'password.min' => 'Mật khẩu phải có ít nhất 3 kí tự',
-            'password.max' => 'Mật khẩu chỉ tối đa 32 kí tự',
+            'password.digits_between' => 'Mật khẩu phải có ít nhất 6 kí tự',
             'passwordAgain.required' => 'Bạn chưa nhập lại mật khẩu',
             'passwordAgain.same' => 'Mật khẩu nhập lại không khớp'
         ]);
@@ -107,6 +107,8 @@ class QL_DangNhapConTroller extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->Quyen = '2'; 
+        $user->Ten = $request->form_name;
+        $user->Tien = '100000'; 
         $user->save();
         return redirect('dangky')->with('thongbao','Chúc mừng bạn đã đăng kí thành công!');
     }

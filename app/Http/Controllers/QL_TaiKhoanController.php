@@ -23,9 +23,9 @@ class QL_TaiKhoanController extends Controller
     public function postThemTaiKhoan(Request $request)
     {
     	$this->validate($request,[
-            'name'=> 'required|min:3|unique:users,name',
+            'name'=> 'required|unique:users,name',
             'email'=>'required|email|unique:users,email',
-            'password'=> 'required|min:3|max:32',
+            'password'=> 'required',
             'passwordAgain'=>'required|same:password'
         ],[
             'name.required'=> 'Bạn chưa nhập tên người dùng',
@@ -34,8 +34,6 @@ class QL_TaiKhoanController extends Controller
             'email.email'=> 'Bạn chưa nhập đúng định dạng email',
             'email.unique'=>'Email đã tồn tại',
             'password.required'=> 'Bạn chưa nhập mật khẩu',
-            'password.min' => 'Mật khẩu phải có ít nhất 3 kí tự',
-            'password.max' => 'Mật khẩu chỉ tối đa 32 kí tự',
             'passwordAgain.required' => 'Bạn chưa nhập lại mật khẩu',
             'passwordAgain.same' => 'Mật khẩu nhập lại không khớp'
         ]);

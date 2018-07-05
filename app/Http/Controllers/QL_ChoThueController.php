@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\PhongChoThue;
 use App\LienHe;
@@ -75,5 +75,19 @@ class QL_ChoThueController extends Controller
         $a = new PhongChoThue();
         $kq =  $a->timphong($quan,$tp,$gia,$dt,$phuong,$loaichothue);
         return view('chothuephong_kqtim')->with('kq',$kq);
+    }
+    public function getViewTinDaDang()
+    {
+        if(isset(Auth::user()->id))
+        {
+            $name = Auth::user()->id;
+            $tim = new PhongChoThue();
+            $tindadang = $tim->TimTin($name);
+            return view('tindadang',['tindadang'=>$tindadang]);
+        }
+        else
+        {
+            return redirect()->route('view_trangchu');
+        }
     }
 }

@@ -29,7 +29,7 @@
 
 <div class="inside-banner">
   <div class="container"> 
-    <h2>Danh sách các phòng</h2>
+    <h2>Danh sách các tin đăng</h2>
   </div>
 </div>
 <div class="container">

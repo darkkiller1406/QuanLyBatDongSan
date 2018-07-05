@@ -9,7 +9,7 @@
           <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
         </div>
         <!--logo start-->
-        <a href="index.html" class="logo"><b>LightZ</b></a>
+        <a href="{{route('view_trangchu')}}" class="logo"><b>LightZ Real Esate</b></a>
         <!--logo end-->
         <div class="top-menu">
           <ul class="nav pull-right top-menu">
@@ -29,10 +29,16 @@
       <aside>
         <div id="sidebar"  class="nav-collapse ">
           <!-- sidebar menu start-->
+          
           <ul class="sidebar-menu" id="nav-accordion">
             <li class="sub-menu">
               <a href="{{route('view_QLYC')}}" class="{{ (\Request::route()->getName() == 'view_QLYC') ? 'active' : '' }}" >
                 <i class="fas fa-clipboard"></i><span>Quản lý yêu cầu</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a href="{{route('view_QLTD')}}" class="{{ (\Request::route()->getName() == 'view_QLTD') ? 'active' : '' }}" >
+                <i class="fas fa-clipboard"></i><span>Quản lý tin đăng</span>
               </a>
             </li>
             <li class="sub-menu">

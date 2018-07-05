@@ -29,51 +29,42 @@
     <!-- banner -->
     <div class="searchbar">
       <div class="row">      
-        <form method="post" action="{{route('timDat_ban')}}">
+        <form method="post" action="{{route('timPhong')}}">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="col-lg-2 col-sm-2 ">
-            <select class="form-control" name="tp" id="tp">
-              <option value="0">Chọn thành phố</option>
-              @foreach ($thanhpho as $tp)
-              <option value="{{$tp->id}}">{{$tp->TenThanhPho}}</option>
-              @endforeach 
-            </select>
+                <select class="form-control" name="loaichothue">
+                  @foreach ($loaichothue as $tp)
+                  <option value="{{$tp->id}}">{{$tp->LoaiChoThue}}</option>
+                  @endforeach 
+                </select>
+          </div>
+          <div class="col-lg-2 col-sm-2">
+                <select class="form-control" name="tp" id="tp">
+                  <option value="0">Thành phố</option>
+                  @foreach ($thanhpho as $tp)
+                  <option value="{{$tp->id}}">{{$tp->TenThanhPho}}</option>
+                  @endforeach 
+                </select>
           </div>
           <div class="col-lg-2 col-sm-2">
             <select class="form-control" name="quan" id="quan">
-              <option value="0">Chọn thành phố</option>
+              <option value="0">Quận/Huyện</option>
             </select>
           </div>
           <div class="col-lg-2 col-sm-2">
-            <select class="form-control" name="dt">
-              <option value="0">Diện tích</option>
-              <option value="1"> < 50 m2</option>
-              <option value="2">50 - 80m2</option>
-              <option value="3">80 - 120m2</option>
-              <option value="4">120 - 160m2</option>
-            </select>
+                <select class="form-control" name="phuong" id="phuong">
+                  <option value="0">Phường</option>
+                </select>
           </div>
           <div class="col-lg-2 col-sm-2">
-            <select class="form-control" name="gia">
-              <option value="0">Khoảng giá</option>
-              <option value="1">< 800 triệu</option>
-              <option value="2">800 triệu - 1,5 tỷ</option>
-              <option value="3">1,5 tỷ - 2,5 tỷ</option>
-              <option value="4">2,5 tỷ - 4 tỷ</option>
-            </select>
-          </div>
-          <div class="col-lg-2 col-sm-2">
-            <select class="form-control" name="huong">
-              <option value="0">Hướng đất</option>
-              <option value="1">Đông</option>
-              <option value="2">Tây</option>
-              <option value="3">Nam</option>
-              <option value="4">Bắc</option>
-              <option value="5">Đông-Nam</option>
-              <option value="6">Đông-Bắc</option>
-              <option value="7">Tây-Nam</option>
-              <option value="8">Tây-Bắc</option>
-            </select>
+                <select class="form-control" name="gia">
+                  <option value="0">Khoảng giá</option>
+                  <option value="1">2 - 3 triệu</option>
+                  <option value="2">3 - 5 triệu</option>
+                  <option value="3">5 - 7 triệu</option>
+                  <option value="4">7 - 10 triệu</option>
+                  <option value="5">Trên 10 triệu</option>
+                </select>
           </div>
           <div class="col-lg-2 col-sm-2">
             <button class="btn btn-success" style="margin-bottom: 10px;">Tìm kiếm</button>
@@ -255,22 +246,35 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    $(document).ready(function(){
-      $('#tp').on('change',function(){
-        if(tp){
-          $.ajax({
-            type:'get',
-            url:'{{ url("timquan") }}',
-            data:{tp:$(this).val()},
-            async: true,
-            success:function(html){
-              $('#quan').html(html);
+    $('#tp').on('change',function(){
+            if(tp){
+              $.ajax({
+                type:'get',
+                url:'{{ url("timquan") }}',
+                data:{tp:$(this).val()},
+                async: true,
+                success:function(html){
+                  $('#quan').html(html);
+                }
+              }); 
+            }else{
+              $('#quan').html('<option value="0">Chọn thành phố</option>');
             }
-          }); 
-        }else{
-          $('#quan').html('<option value="0">Chọn thành phố</option>');
-        }
-      });
-    });
+          });
+  $('#quan').on('change',function(){
+            if(quan){
+              $.ajax({
+                type:'get',
+                url:'{{ url("timphuong") }}',
+                data:{quan:$(this).val()},
+                async: true,
+                success:function(html){
+                  $('#phuong').html(html);
+                }
+              }); 
+            }else{
+              $('#phuong').html('<option value="0">Chọn quận/huyện</option>');
+            }
+          });
   </script>
   @endsection

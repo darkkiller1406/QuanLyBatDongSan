@@ -67,7 +67,7 @@
 										<ul class="sub-menu">
 											<li><a href="{{route('view_dangtin')}}" class="{{ (\Request::route()->getName() == 'view_dangtin') ? 'active' : '' }}">ĐĂNG TIN</a>
 												<hr>
-											<li><a href="#" style="padding-bottom: 20px;">THÔNG TIN</a></li>
+											<li><a href="{{route('view_tindadang')}}" style="padding-bottom: 20px;">THÔNG TIN</a></li>
 											<hr>
 											<li><a href="./dangxuat" style="padding-top: 20px;">ĐĂNG XUẤT</a></li>
 										</li>

@@ -35,7 +35,7 @@ Route::post('guiyeucaull', 'QL_YeuCauController@ThemYeuCauLL')->name('ThemYeuCau
 
 Route::get('dangky', 'QL_DangNhapController@getViewDK')->name('DangKy');
 
-Route::post('postdangky', 'QL_DangNhapController@postDK')->name('postDangKy');
+Route::any('postdangky', 'QL_DangNhapController@postDK')->name('postDangKy');
 
 Route::post('dangnhap', 'QL_DangNhapController@getDN');
 
@@ -50,6 +50,8 @@ Route::any('postdangtin', 'QL_ChoThueController@postDangTin');
 Route::any('timquan','QL_DatController@timQuan');
 
 Route::any('timphuong','QL_DatController@timPhuong');
+
+Route::any('tindadang','QL_ChoThueController@getViewTinDaDang')->name('view_tindadang');
 
 Route::any('timphong', 'QL_ChoThueController@timPhong')->name('timPhong');
 // page admin
@@ -92,6 +94,10 @@ Route::group(['prefix' => 'page','middleware'=>'Adminlogin'], function() {
     Route::get('xoaycll/{id}','QL_YeuCauController@getXoaLL');
     Route::any('timyeucau', 'QL_YeuCauController@timYC')->name('TKYC');
     Route::any('guimail','QL_YeuCauController@guiMail');
+    // Quan ly tin dang thue phong
+    Route::get('quanlytindang','QL_TinDangController@getView')->name('view_QLTD');
+    Route::any('timtindang', 'QL_TinDangController@timTD')->name('TKTD');
+    Route::get('xoatd/{id}','QL_TinDangController@getXoa');
     //
      Route::any('thongkedoanhthu','ThongKeController@getThongKeDoanhThu')->name('TKDT');
 
