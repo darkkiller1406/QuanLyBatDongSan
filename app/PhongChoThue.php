@@ -112,7 +112,7 @@ class PhongChoThue extends Model
     public function TimTin($name)
     {
         if(isset($name)){
-            return DB::select("SELECT *,LoaiTin.LoaiTin as loaitin,LoaiChoThue.LoaiChoThue as loaichothue, PhongThue.created_at as ngaydang FROM PhongThue,ThanhPho,Quan,Phuong,LoaiChoThue,LoaiTin,users WHERE phongthue.nguoidang = '".$name."' and PhongThue.phuong = Phuong.id and Phuong.ThuocQuan = Quan.id and Quan.ThuocThanhPho = ThanhPho.id and PhongThue.loaichothue = LoaiChoThue.id and PhongThue.LoaiTin = LoaiTin.id and users.id = PhongThue.NguoiDang");
+            return DB::select("SELECT *,LoaiTin.LoaiTin as loaitin,LoaiChoThue.LoaiChoThue as loaichothue, PhongThue.created_at as ngaydang, PhongThue.id as ID, PhongThue.gia as GiaThue FROM PhongThue,ThanhPho,Quan,Phuong,LoaiChoThue,LoaiTin,users WHERE phongthue.nguoidang = '".$name."' and PhongThue.phuong = Phuong.id and Phuong.ThuocQuan = Quan.id and Quan.ThuocThanhPho = ThanhPho.id and PhongThue.loaichothue = LoaiChoThue.id and PhongThue.LoaiTin = LoaiTin.id and users.id = PhongThue.NguoiDang");
         }
     }
 }

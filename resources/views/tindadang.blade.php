@@ -21,7 +21,7 @@
             <?php if($p->TrangThai == 1) { ?>
               <div class="col-lg-12 col-sm-12">
                 <div class="properties" style="text-align: left;">
-                  <p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip">{{$p->TieuDe}}</a></p>
+                  <p class="price-rent"><a  href="chitietphong/{{$p->ID}}" class="vip">{{$p->TieuDe}}</a></p>
                   <div class="listing-detail">
                     <div class="row">
                       <div class="col-md-12" style="padding-bottom: 10px;">
@@ -37,9 +37,9 @@
                         <?php $date = date_create($p->ngaydang); ?>
                       <b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
                       </div>
-                      <div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
+                      <div class="col-md-12"><p class="price-red">Giá: {{$p->GiaThue}} Triệu/Tháng</p></div>
                       <div class="col-md-5"></div>
-                      <div class="col-md-2"><a class="btn btn-basic" href="chitiet/{{$p->id}}">GIA HẠN</a></div>
+                      <div class="col-md-2"><a class="btn btn-basic" href="chinhsuatindang/{{$p->ID}}">CHỈNH SỬA</a></div>
                     </div>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
           <?php if($p->TrangThai == 2) { ?>
             <div class="col-lg-12 col-sm-12" style="padding-bottom: 15px;">
               <div class="properties" style="text-align: left;">
-                <p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip">{{$p->TieuDe}}</a></p>
+                <p class="price-rent"><a  href="chitietphong/{{$p->ID}}" class="vip">{{$p->TieuDe}}</a></p>
                 <div class="listing-detail">
                   <div class="row">
                     <div class="col-md-12" style="padding-bottom: 10px;">
@@ -78,8 +78,8 @@
                       <?php $date = date_create($p->ngaydang); ?>
                       <b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
                     </div>
-                    <div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
-                    <a class="btn btn-detail" href="chitiet/{{$p->id}}">GIA HẠN</a>
+                    <div class="col-md-12"><p class="price-red">Giá: {{$p->GiaThue}} Triệu/Tháng</p></div>
+                    <a class="btn btn-detail" href="giahan/{{$p->ID}}">GIA HẠN</a>
                   </div>
                 </div>
               </div>

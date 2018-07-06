@@ -41,6 +41,7 @@ class QL_ChoThueController extends Controller
         		$image->move($destinationPath, $input['imagename']);
         		$tam =$input['imagename'].';'.$tam;
         	}
+            $p->HinhAnh = $tam;
         }
         $p->TieuDe = $r->tieude;
         $p->LoaiChoThue = $r->loaichothue;
@@ -52,8 +53,7 @@ class QL_ChoThueController extends Controller
         $p->NgayKetThuc = $r->ngayketthuc;
         $p->TongTien = $r->tongtien;
         $p->Loaitin = $r->loaitin;
-        $p->HinhAnh = $tam;
-        $p->TrangThai = '2';
+        $p->TrangThai = '1';
         $p->NguoiDang = $r->nguoidang;
         $p->DiaChi = $r->diachi;
         $p->TenLienHe = $r->tenlienhe;
@@ -61,7 +61,54 @@ class QL_ChoThueController extends Controller
         $p->DienThoaiLienLac = $r->dienthoai;
         $p->Email = $r->email;
         $p->save();
-        return ('Đã thêm tin vào danh sách duyệt.');
+        return ('Đăng tin thành công.');
+        
+    }
+    public function postSuaTin(Request $r)
+    {
+        $p = PhongChoThue::find($r->idtin);
+        $i=0;
+        $tam = '';
+        //
+        // xử lý ảnh
+        $dem = $r->dem;
+        if($dem != 0)
+        {
+            $s = $p->HinhAnh;
+            $m = explode(';', $s);
+            for($a=0;$a<(count($m)-1);$a++)
+            {
+                Storage::delete($m[$a]);
+            }
+            for($n=0;$n<$dem;$n++)
+            {
+                $file = 'file'.$n;
+                $image =  $r->$file;
+                $input['imagename'] = 'IMG_'.$max.'_'.++$i.'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/img/ThuePhong');
+                $image->move($destinationPath, $input['imagename']);
+                $tam =$input['imagename'].';'.$tam;
+            }
+            $p->HinhAnh = $tam;
+        }
+        $p->TieuDe = $r->tieude;
+        $p->LoaiChoThue = $r->loaichothue;
+        $p->Phuong = $r->phuong;
+        $p->DienTich = $r->dientich;
+        $p->Gia = $r->gia;
+        $p->MoTa = $r->mota;
+        $p->NgayBatDau = $r->ngaybatdau;
+        $p->NgayKetThuc = $r->ngayketthuc;
+        $p->TongTien = $r->tongtien;
+        $p->Loaitin = $r->loaitin;  
+        $p->NguoiDang = $r->nguoidang;
+        $p->DiaChi = $r->diachi;
+        $p->TenLienHe = $r->tenlienhe;
+        $p->DiaChiLienLac = $r->diachill;
+        $p->DienThoaiLienLac = $r->dienthoai;
+        $p->Email = $r->email;
+        $p->save();
+        return ('Cập nhật thành công.');
         
     }
     public function timPhong(Request $r)
@@ -89,5 +136,10 @@ class QL_ChoThueController extends Controller
         {
             return redirect()->route('view_trangchu');
         }
+    }
+    public function getChinhSua($id)
+    {
+        $tin = PhongChoThue::find($id);
+        return view('dangtin')->with('kq',$tin);
     }
 }

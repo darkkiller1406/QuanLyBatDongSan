@@ -21,6 +21,8 @@ Route::get('chitiet/{id}','ChiTietController@getView')->name('view_chitiet');
 
 Route::get('chitietphong/{id}','ChiTietController@getViewRoom')->name('view_chitiet');
 
+Route::get('chinhsuatindang/{id}','QL_ChoThueController@getChinhSua');
+
 Route::get('danhsachdat','QL_DatController@getView_DSDat')->name('view_dsDat');
 
 Route::get('lienlac','TrangChuController@getView_lienlac')->name('view_lienlac');
@@ -41,11 +43,13 @@ Route::post('dangnhap', 'QL_DangNhapController@getDN');
 
 Route::get('dangxuat', 'QL_DangNhapController@getDX');
 
-Route::get('danhsachphong','QL_ChoThueController@getView' )->name('view_dsPhong');
+Route::get('danhsachtin','QL_ChoThueController@getView' )->name('view_dsPhong');
 
 Route::get('dangtin','QL_ChoThueController@getViewDangTin' )->name('view_dangtin');
 
 Route::any('postdangtin', 'QL_ChoThueController@postDangTin');
+
+Route::any('postsuatin', 'QL_ChoThueController@postSuaTin');
 
 Route::any('timquan','QL_DatController@timQuan');
 
