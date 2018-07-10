@@ -77,13 +77,16 @@
 			<ol class="carousel-indicators">
 				<?php $i = 0; ?>
 				@foreach ($phong as $p)
+				<?php if($p->LoaiTin == 1 && $p->TrangThai == 1) { ?>
 				<li data-target="#myCarousel-a" data-slide-to="{{$i++}}" class="active"></li>
+				<?php } ?>
 				@endforeach
 			</ol>
 			<!-- Carousel items -->
 			<div class="carousel-inner">
 				<?php $a = 0; ?>
 					@foreach ($phong as $p)
+					<?php if($p->LoaiTin == 1 && $p->TrangThai == 1) { ?>
 					<div class="item <?php if ($a==0) { echo 'active' ;} ?>">
 						<div class="col-lg-12 col-sm-12" style="padding-bottom: 15px">
 								<div class="properties" style="text-align: left;">
@@ -124,7 +127,7 @@
 							</div>
 						</div>
 					</div>
-					<?php $a++; ?>
+					<?php $a++;} ?>
 					@endforeach
 				</div>
 			</div>

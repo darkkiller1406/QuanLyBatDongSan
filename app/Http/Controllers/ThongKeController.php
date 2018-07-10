@@ -14,6 +14,15 @@ class ThongKeController extends Controller
     	if(isset($request->thang)) {$month = $request->thang;$year = $request->nam;}
     	$ThongKe = new ThongKe();
     	$thongkedoanhthu= $ThongKe->getdoanhthu($request->thang,$request->nam);
-    	return view('page.thongkedoanhthu',['thongkedoanhthu'=>$thongkedoanhthu, 'month'=>$month,'year'=>$year]);
+    	return view('page/thongkedoanhthu',['thongkedoanhthu'=>$thongkedoanhthu, 'month'=>$month,'year'=>$year]);
+    }
+    public function getThongKeGiaoDich(Request $request)
+    {
+        $month=date('n');
+        $year=date('Y');
+        if(isset($request->thang)) {$month = $request->thang;$year = $request->nam;}
+        $ThongKe = new ThongKe();
+        $thongkedoanhthu= $ThongKe->getgiaodich($request->thang,$request->nam);
+        return view('page/thongkegiaodich',['thongkegiaodich'=>$thongkedoanhthu, 'month'=>$month,'year'=>$year]);
     }
 }

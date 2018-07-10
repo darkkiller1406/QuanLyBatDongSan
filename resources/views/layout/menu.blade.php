@@ -63,10 +63,15 @@
 
             </li>
             <li class="sub-menu">
-              <a href="{{route('TKDT')}}" class="{{ (\Request::route()->getName() == 'TKDT') ? 'active' : '' }}">
-                <span><i class="far fa-chart-bar"></i>Thống kê</span>
-              </a>
-            </li>
+                      <a href="javascript:;" >
+                          <i class="fas fa-chart-bar"></i>
+                          <span>Thống kê</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="{{route('TKDT')}}">Thống kê doanh thu</a></li>
+                          <li><a  href="{{route('TKGD')}}">Thống kê giao dịch</a></li>
+                      </ul>
+                  </li>
 
           </ul>
           <!-- sidebar menu end-->

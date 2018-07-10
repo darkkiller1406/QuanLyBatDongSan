@@ -183,7 +183,7 @@
                     </p>
                     <p><b>Người đăng:</b> {{$chitiet->nguoidang->Ten}}</p>
                     <p><b>Loại tin rao:</b> {{$chitiet->loaichothue->LoaiChoThue}}</p>
-                    <p><b>Ngày cập nhật:</b> {{$chitiet->created_at}}</p>
+                    <p><b>Ngày đăng:</b> {{$chitiet->NgayBatDau }}</p>
                     <p><b>Giá cho thuê:</b> {{$chitiet->Gia}} Triệu/Tháng</p>
                     <p><b>Diện tích:</b> {{$chitiet->DienTich}} m2</p>
                   </li>

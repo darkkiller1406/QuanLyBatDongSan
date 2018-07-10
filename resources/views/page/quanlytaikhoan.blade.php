@@ -1,4 +1,4 @@
-@section('title','Quản lý nhân viên')
+@section('title','Quản lý tài khoản')
 @extends('layout.master')
 @section('content')
 <section id="main-content">

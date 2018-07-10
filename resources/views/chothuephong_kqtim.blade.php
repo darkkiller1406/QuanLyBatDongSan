@@ -106,15 +106,14 @@
 					<!-- properties -->
 					<?php $a=0; ?>
 					@foreach ($kq as $p)
-					<?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
-					<?php if($p->TrangThai == 1) { ?>
-					<div class="col-lg-12 col-sm-12" style="padding-bottom: 15px;">
+					<?php if($p->TrangThai == 1 && $p->LoaiTin == 1) { ?>
+					<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung1';$a++;} else { echo 'col-lg-12 col-sm-12 khung-1'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
 						<div class="properties" style="text-align: left;">
 							<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
 							<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
 							</div>
 							<div class="col-lg-8">
-								<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip">{{$p->TieuDe}}</a></p>
+								<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip1">{{$p->TieuDe}}</a></p>
 								<div class="listing-detail">
 									<div class="row">
 										<div class="col-md-12" style="padding-bottom: 10px;">
@@ -128,7 +127,73 @@
 											{{$p->TenQuan}}, {{$p->TenThanhPho}}
 										</div>
 										<div class="col-md-4">
-											<?php $date = date_create($p->ngaydang); ?>
+											<?php $date = date_create( $p->NgayBatDau); ?>
+											<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
+										</div>
+										<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				@endforeach
+				@foreach ($kq as $p)
+					<?php if($p->TrangThai == 1 && $p->LoaiTin == 2) { ?>
+					<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung2';$a++;} else { echo 'col-lg-12 col-sm-12 khung-2'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
+						<div class="properties" style="text-align: left;">
+							<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
+							<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+							</div>
+							<div class="col-lg-8">
+								<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip2">{{$p->TieuDe}}</a></p>
+								<div class="listing-detail">
+									<div class="row">
+										<div class="col-md-12" style="padding-bottom: 10px;">
+											{{$p->MoTa}}
+										</div>
+										<div class="col-md-3">
+											<b>Diện tích:</b> {{$p->DienTich}} m2
+										</div>
+										<div class="col-md-5">
+											<b>Khu vực:</b>
+											{{$p->TenQuan}}, {{$p->TenThanhPho}}
+										</div>
+										<div class="col-md-4">
+											<?php $date = date_create( $p->NgayBatDau); ?>
+											<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
+										</div>
+										<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				@endforeach
+				@foreach ($kq as $p)
+					<?php if($p->TrangThai == 1 && $p->LoaiTin == 3) { ?>
+					<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung3';$a++;} else { echo 'col-lg-12 col-sm-12 khung-3'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
+						<div class="properties" style="text-align: left;">
+							<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
+							<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+							</div>
+							<div class="col-lg-8">
+								<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip3">{{$p->TieuDe}}</a></p>
+								<div class="listing-detail">
+									<div class="row">
+										<div class="col-md-12" style="padding-bottom: 10px;">
+											{{$p->MoTa}}
+										</div>
+										<div class="col-md-3">
+											<b>Diện tích:</b> {{$p->DienTich}} m2
+										</div>
+										<div class="col-md-5">
+											<b>Khu vực:</b>
+											{{$p->TenQuan}}, {{$p->TenThanhPho}}
+										</div>
+										<div class="col-md-4">
+											<?php $date = date_create( $p->NgayBatDau); ?>
 											<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
 										</div>
 										<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>

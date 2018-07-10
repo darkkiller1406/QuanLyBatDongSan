@@ -51,6 +51,8 @@ Route::any('postdangtin', 'QL_ChoThueController@postDangTin');
 
 Route::any('postsuatin', 'QL_ChoThueController@postSuaTin');
 
+Route::any('kiemtratien','QL_ChoThueController@kiemtraTien');
+
 Route::any('timquan','QL_DatController@timQuan');
 
 Route::any('timphuong','QL_DatController@timPhuong');
@@ -103,6 +105,7 @@ Route::group(['prefix' => 'page','middleware'=>'Adminlogin'], function() {
     Route::any('timtindang', 'QL_TinDangController@timTD')->name('TKTD');
     Route::get('xoatd/{id}','QL_TinDangController@getXoa');
     //
-     Route::any('thongkedoanhthu','ThongKeController@getThongKeDoanhThu')->name('TKDT');
+    Route::any('thongkedoanhthu','ThongKeController@getThongKeDoanhThu')->name('TKDT');
+    Route::any('thongkegiaodich','ThongKeController@getThongKeGiaoDich')->name('TKGD');
 
  });
