@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\PhongChoThue;
 use App\LienHe;
+use App\TaiKhoan;
+use App\LichSuGiaoDich;
 class QL_ChoThueController extends Controller
 {
     //
@@ -43,17 +45,46 @@ class QL_ChoThueController extends Controller
         	}
             $p->HinhAnh = $tam;
         }
+        //
+        $user = TaiKhoan::find(Auth::user()->id);
+        $tien = $user->Tien;
+        $user->Tien = ($tien - $r->tongtien);
+        $user->save();
+        //
+        $lichsu = new LichSuGiaoDich();
+        $lichsu->TienGiaoDich =  $r->tongtien;
+        $lichsu->GiaoDich = 'Thực hiện đăng tin mới';
+        $lichsu->NguoiThucHien = Auth::user()->id;
+        $lichsu->save();
+        //
+        $date = date('d');
+        $datestart = substr($r->ngaybatdau,8);
+        if($date == $datestart)
+        {
+            $date = date('Y-m-d H:i:s');
+            $p->NgayBatDau =  $date;
+            $gia = $r->giatin;
+            $tongtien = ($r->tongtien);
+            $tongngay = $tongtien/$gia;
+            $p->NgayKetThuc = date("Y-m-d H:i:s", strtotime($date . "+".$tongngay." day"));
+            $p->TrangThai = '1';
+        }
+        else
+        {
+            $p->NgayBatDau = $r->ngaybatdau;
+            $p->NgayKetThuc = $r->ngayketthuc;
+            $p->TrangThai = '2';
+        }
+        //
         $p->TieuDe = $r->tieude;
         $p->LoaiChoThue = $r->loaichothue;
         $p->Phuong = $r->phuong;
         $p->DienTich = $r->dientich;
         $p->Gia = $r->gia;
         $p->MoTa = $r->mota;
-        $p->NgayBatDau = $r->ngaybatdau;
-        $p->NgayKetThuc = $r->ngayketthuc;
         $p->TongTien = $r->tongtien;
+        $p->TienCu = '0';
         $p->Loaitin = $r->loaitin;
-        $p->TrangThai = '1';
         $p->NguoiDang = $r->nguoidang;
         $p->DiaChi = $r->diachi;
         $p->TenLienHe = $r->tenlienhe;
@@ -91,15 +122,63 @@ class QL_ChoThueController extends Controller
             }
             $p->HinhAnh = $tam;
         }
+        // xử lý giao dịch và lưu vào lịch sử giao dịch
+        if(isset($r->tienthaydoi))
+        {
+            $user = TaiKhoan::find(Auth::user()->id);
+            $tien = $user->Tien;
+            $user->Tien = ($tien - $r->tienthaydoi);
+            $user->save();
+            //
+            $lichsu = new LichSuGiaoDich();
+            $lichsu->TienGiaoDich =  $r->tienthaydoi;
+            $lichsu->GiaoDich = 'Thực hiện thay đổi loại tin';
+            $lichsu->NguoiThucHien = Auth::user()->id;
+            $lichsu->save();
+            //
+            $t = $p->TongTien;
+            $p->TongTien = ($r->tongtien)+($p->TienThayDoi);
+            $p->TienCu = $t;
+        }
+        if( $r->tam == 1)
+        {
+            $user = TaiKhoan::find(Auth::user()->id);
+            $tien = $user->Tien;
+            $user->Tien = ($tien - $r->tongtien);
+            $user->save();
+            //
+            $lichsu = new LichSuGiaoDich();
+            $lichsu->TienGiaoDich =  $r->tongtien;
+            $lichsu->GiaoDich = 'Thực hiện gia hạn ngày đăng';
+            $lichsu->NguoiThucHien = Auth::user()->id;
+            $lichsu->save();
+            //
+            $t = $p->TongTien;
+            $p->TongTien = ($r->tongtien)+($p->TongTien);
+            $p->TienCu = $t;
+        }
+        // xử lý ngày nếu ngày đăng cùng ngày hiện tại
+        $date = date('d');
+        $datestart = substr($r->ngaybatdau,8);
+        if($date == $datestart)
+        {
+            $date = date('Y-m-d H:i:s');
+            $gia = $r->giatin;
+            $tongtien = $r->tongtien;
+            $tongngay = $tongtien/$gia;
+            $p->NgayKetThuc = date("Y-m-d H:i:s", strtotime($date . "+".$tongngay." day"));;
+        }
+        else
+        {
+            $p->NgayKetThuc = $r->ngayketthuc;
+        }
+        // lưu vào csdl
         $p->TieuDe = $r->tieude;
         $p->LoaiChoThue = $r->loaichothue;
         $p->Phuong = $r->phuong;
         $p->DienTich = $r->dientich;
         $p->Gia = $r->gia;
         $p->MoTa = $r->mota;
-        $p->NgayBatDau = $r->ngaybatdau;
-        $p->NgayKetThuc = $r->ngayketthuc;
-        $p->TongTien = $r->tongtien;
         $p->Loaitin = $r->loaitin;  
         $p->NguoiDang = $r->nguoidang;
         $p->DiaChi = $r->diachi;
@@ -109,7 +188,6 @@ class QL_ChoThueController extends Controller
         $p->Email = $r->email;
         $p->save();
         return ('Cập nhật thành công.');
-        
     }
     public function timPhong(Request $r)
     {
@@ -141,5 +219,18 @@ class QL_ChoThueController extends Controller
     {
         $tin = PhongChoThue::find($id);
         return view('dangtin')->with('kq',$tin);
+    }
+    public function kiemtraTien(Request $r)
+    {
+        $tongtien = $r->tongtien;
+        $tien = Auth::user()->Tien;
+        if($tongtien <= $tien )
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

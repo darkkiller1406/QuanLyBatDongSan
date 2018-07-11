@@ -26,11 +26,28 @@
 		
 	</div>
 </div>
-
+<?php
+function _substr($str, $length, $minword = 3)
+{
+$sub = '';
+$len = 0;
+foreach (explode(' ', $str) as $word)
+{
+    $part = (($sub != '') ? ' ' : '') . $word;
+    $sub .= $part;
+    $len += strlen($part);
+    if (strlen($word) > $minword && strlen($sub) >= $length)
+    {
+      break;
+    }
+ }
+    return $sub . (($len < strlen($str)) ? '...' : '');
+}
+?>
 <div class="inside-banner">
-  <div class="container"> 
-    <h2>Danh sách các tin đăng</h2>
-  </div>
+	<div class="container"> 
+		<h2>Danh sách các tin đăng</h2>
+	</div>
 </div>
 <div class="container">
 	<div class="properties-listing spacer">
@@ -96,7 +113,7 @@
 				</div>
 			</div>
 			<?php
-			 $i=0; ?>
+			$i=0; ?>
 			@foreach ($phong as $d) <?php if($d->TrangThai == 1) {$i++;} ?> @endforeach
 			<div class="col-lg-9 col-sm-8">
 				<div class="sortby clearfix">
@@ -106,50 +123,152 @@
 					<!-- properties -->
 					<?php $a=0; ?>
 					@foreach ($phong as $p)
-					<?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
-					<?php if($p->TrangThai == 1) { ?>
-					<div class="col-lg-12 col-sm-12" style="padding-bottom: 15px;">
-						<div class="properties" style="text-align: left;">
-							<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
-							<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
-							</div>
-							<div class="col-lg-8">
-								<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip">{{$p->TieuDe}}</a></p>
-								<div class="listing-detail">
-									<div class="row">
-										<div class="col-md-12" style="padding-bottom: 10px;">
-											{{$p->MoTa}}
+					<?php if($p->TrangThai == 1) {
+						if($p->LoaiTin == 1) {
+							?>
+							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung1';$a++;} else { echo 'col-lg-12 col-sm-12 khung-1'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
+								<div class="properties" style="text-align: left;">
+									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+								</div>
+								<div class="col-lg-8">
+									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip1">{{$p->TieuDe}}</a></p>
+									<div class="listing-detail">
+										<div class="row">
+											<div class="col-md-12" style="padding-bottom: 10px;">
+												{{_substr(($p->MoTa),350)}}
+											</div>
+											<div class="col-md-3">
+												<b>Diện tích:</b> {{$p->DienTich}} m2
+											</div>
+											<div class="col-md-5">
+												<b>Khu vực:</b>
+												@foreach ($quan as $q)
+												<?php if ($q->id == $p->phuong->ThuocQuan){
+													echo $q->TenQuan.', ';
+													$tam = $q->ThuocThanhPho;
+												} ?>
+												@endforeach
+												@foreach ($thanhpho as $tp)
+												<?php
+												if($tp->id == $tam){
+													echo $tp->TenThanhPho;
+												}
+												?>
+												@endforeach
+											</div>
+											<div class="col-md-4">
+												<?php $date =  date_create( $p->NgayBatDau); ?>
+												<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
+											</div>
+											<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
 										</div>
-										<div class="col-md-3">
-											<b>Diện tích:</b> {{$p->DienTich}} m2
-										</div>
-										<div class="col-md-5">
-											<b>Khu vực:</b>
-											@foreach ($quan as $q)
-											<?php if ($q->id == $p->phuong->ThuocQuan){
-												echo $q->TenQuan.', ';
-												$tam = $q->ThuocThanhPho;
-											} ?>
-											@endforeach
-											@foreach ($thanhpho as $tp)
-											<?php
-											if($tp->id == $tam){
-												echo $tp->TenThanhPho;
-											}
-											?>
-											@endforeach
-										</div>
-										<div class="col-md-4">
-											<?php $date = $p->created_at; ?>
-											<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
-										</div>
-										<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				<?php } ?>
+						<?php 
+					}
+				} ?>
+				@endforeach
+				@foreach ($phong as $p)
+					<?php if($p->TrangThai == 1) {
+						if($p->LoaiTin == 2) {
+							?>
+							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung2';$a++;} else { echo 'col-lg-12 col-sm-12 khung-2'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
+								<div class="properties" style="text-align: left;">
+									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+								</div>
+								<div class="col-lg-8">
+									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip2">{{$p->TieuDe}}</a></p>
+									<div class="listing-detail">
+										<div class="row">
+											<div class="col-md-12" style="padding-bottom: 10px;">
+												{{_substr(($p->MoTa),350)}}
+											</div>
+											<div class="col-md-3">
+												<b>Diện tích:</b> {{$p->DienTich}} m2
+											</div>
+											<div class="col-md-5">
+												<b>Khu vực:</b>
+												@foreach ($quan as $q)
+												<?php if ($q->id == $p->phuong->ThuocQuan){
+													echo $q->TenQuan.', ';
+													$tam = $q->ThuocThanhPho;
+												} ?>
+												@endforeach
+												@foreach ($thanhpho as $tp)
+												<?php
+												if($tp->id == $tam){
+													echo $tp->TenThanhPho;
+												}
+												?>
+												@endforeach
+											</div>
+											<div class="col-md-4">
+												<?php $date = date_create( $p->NgayBatDau);  ?>
+												<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
+											</div>
+											<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php 
+					}
+				} ?>
+				@endforeach
+				@foreach ($phong as $p)
+					<?php if($p->TrangThai == 1) {
+						if($p->LoaiTin == 3) {
+							?>
+							<!-- -->
+							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung3';$a++;} else { echo 'col-lg-12 col-sm-12 khung-3'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
+								<div class="properties" style="text-align: left;">
+									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+								</div>
+								<div class="col-lg-8">
+									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip3">{{$p->TieuDe}}</a></p>
+									<div class="listing-detail">
+										<div class="row">
+											<div class="col-md-12" style="padding-bottom: 10px;">
+												{{_substr(($p->MoTa),350)}}
+											</div>
+											<div class="col-md-3">
+												<b>Diện tích:</b> {{$p->DienTich}} m2
+											</div>
+											<div class="col-md-5">
+												<b>Khu vực:</b>
+												@foreach ($quan as $q)
+												<?php if ($q->id == $p->phuong->ThuocQuan){
+													echo $q->TenQuan.', ';
+													$tam = $q->ThuocThanhPho;
+												} ?>
+												@endforeach
+												@foreach ($thanhpho as $tp)
+												<?php
+												if($tp->id == $tam){
+													echo $tp->TenThanhPho;
+												}
+												?>
+												@endforeach
+											</div>
+											<div class="col-md-4">
+												<?php $date = date_create( $p->NgayBatDau); ?>
+												<b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
+											</div>
+											<div class="col-md-12"><p class="price-red">Giá: {{$p->Gia}} Triệu/Tháng</p></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php 
+					}
+				} ?>
 				@endforeach
 			</div>
 		</div>
@@ -161,34 +280,34 @@
 @section('script')
 <script type="text/javascript">
 	$('#tp').on('change',function(){
-            if(tp){
-              $.ajax({
-                type:'get',
-                url:'{{ url("timquan") }}',
-                data:{tp:$(this).val()},
-                async: true,
-                success:function(html){
-                  $('#quan').html(html);
-                }
-              }); 
-            }else{
-              $('#quan').html('<option value="0">Chọn thành phố</option>');
-            }
-          });
+		if(tp){
+			$.ajax({
+				type:'get',
+				url:'{{ url("timquan") }}',
+				data:{tp:$(this).val()},
+				async: true,
+				success:function(html){
+					$('#quan').html(html);
+				}
+			}); 
+		}else{
+			$('#quan').html('<option value="0">Chọn thành phố</option>');
+		}
+	});
 	$('#quan').on('change',function(){
-            if(quan){
-              $.ajax({
-                type:'get',
-                url:'{{ url("timphuong") }}',
-                data:{quan:$(this).val()},
-                async: true,
-                success:function(html){
-                  $('#phuong').html(html);
-                }
-              }); 
-            }else{
-              $('#phuong').html('<option value="0">Chọn quận/huyện</option>');
-            }
-          });
+		if(quan){
+			$.ajax({
+				type:'get',
+				url:'{{ url("timphuong") }}',
+				data:{quan:$(this).val()},
+				async: true,
+				success:function(html){
+					$('#phuong').html(html);
+				}
+			}); 
+		}else{
+			$('#phuong').html('<option value="0">Chọn quận/huyện</option>');
+		}
+	});
 </script>
 @endsection

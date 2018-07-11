@@ -196,12 +196,13 @@
                    <label class="col-lg-4 lease-label" id="dongia">Đơn giá: {{$gia}} VNĐ</label>
                    <label class="col-lg-4 lease-label" id="songaydang">Số ngày đăng: {{$songaydang}}</label>
                    <label class="col-lg-4 lease-label" id="tongtien">Tổng tiền: {{$kq->TongTien}}</label>
+                   <input type="hidden" name="tongtiencu" value="{{$kq->TienCu}}" id="tongtiencu" required>
                  </div>
                  </div>
              </div>
                 <div class="col-lg-12">
                    <div class="col-lg-5"></div>
-                   <button class="btn btn-detail" name="Submit" onClick="SuaTin()" style="width: 20%;font-size: 18px">Đăng ký</button>
+                   <button class="btn btn-detail" name="Submit" onClick="SuaTin()" style="width: 20%;font-size: 18px">CẬP NHẬT</button>
                 </div>
         </div>
           <?php  } else { ?>
@@ -338,7 +339,7 @@
              </div>
                 <div class="col-lg-12">
                    <div class="col-lg-5"></div>
-                   <button class="btn btn-detail" name="Submit" onClick="DangTin()" style="width: 20%;font-size: 18px">Đăng ký</button>
+                   <button class="btn btn-detail" name="Submit" onClick="DangTin()" style="width: 20%;font-size: 18px">ĐĂNG TIN</button>
                 </div>
         </div>
         <?php  } ?>
@@ -354,6 +355,7 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
           });
+          var changeday1=false,changeday2=false;tienthaydoi=false;
           function DangTin()
           {
             var data = new FormData();
@@ -470,6 +472,7 @@
                  $('#ktphuong').html('*Vui lòng chọn phường');
                  check++;
             }
+
             if(check == 0)
             {
                 var tongtien;
@@ -482,6 +485,19 @@
                 {
                   tongtien = gia*totalDays;
                 }
+                $.ajax({
+                  type:'get',
+                  url:'{{ url("kiemtratien") }}',
+                  data:{tongtien:tongtien},
+                  async: true,
+                  success:function(html){
+                    kt = html;
+                    if(kt == 1)
+                    {
+                      alert('Bạn không đủ tiền để thực hiện việc đăng bài. Vui lòng nạp thêm tiền.')
+                    }
+                  }
+                });
                 loaitin =  $('#loaitin').val().substring(0,1);
                  data.append('tieude', $('#tieude').val());
                  data.append('loaichothue', $('#loaichothue').val());
@@ -503,6 +519,7 @@
                  data.append('loaitin', loaitin);
                  data.append('email', $('#email').val());
                  data.append('nguoidang', $('#nguoidang').val());
+                 date.append('tongngay',totalDays);
 
              //  $.ajax({
              //    type:'post',
@@ -530,6 +547,8 @@
              //     alert(html);
              //   }
              // });
+             if(kt == 0)
+             {
               $.ajax({
                 type:'post',
                 url:'{{url("postdangtin")}}',
@@ -540,6 +559,7 @@
                  alert(JSON.stringify(html));
                }
              });
+             }
             }
           }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -661,38 +681,94 @@
             }
             if(check == 0)
             {
+
                 var tongtien;
                 var gia = $('#loaitin').val().substring(2);
                 var d2 = new Date($('#ngayketthuc').val());
                 var d1 = new Date($('#ngaybatdau').val());
                 var offset = d2.getTime() - d1.getTime();
                 var totalDays = Math.round(offset / 1000 / 60 / 60 / 24);
+                var kt;
                 if($('#loaitin').val() != 0)
                 {
                   tongtien = gia*totalDays;
+                  tongtiencu = $('#tongtiencu').val();
+                  tienthem  = tongtien-tongtiencu;
                 }
                 loaitin =  $('#loaitin').val().substring(0,1);
-                 data.append('tieude', $('#tieude').val());
-                 data.append('loaichothue', $('#loaichothue').val());
-                 data.append('tp', $('#tp').val());
-                 data.append('tieude', $('#tieude').val());
-                 data.append('loaichothue', $('#loaichothue').val());
-                 data.append('quan', $('#quan').val());
-                 data.append('phuong', $('#phuong').val());
-                 data.append('dientich', $('#dientich').val());
-                 data.append('gia', $('#gia').val());
-                 data.append('mota', $('#mota').val());
-                 data.append('tenlienhe', $('#tenlienhe').val());
-                 data.append('diachi', $('#diachi').val());
-                 data.append('diachill', $('#diachill').val());
-                 data.append('dienthoai', $('#dienthoai').val());
-                 data.append('ngaybatdau', $('#ngaybatdau').val());
-                 data.append('ngayketthuc', $('#ngayketthuc').val());
-                 data.append('tongtien', tongtien);
-                 data.append('loaitin', loaitin);
-                 data.append('email', $('#email').val());
-                 data.append('nguoidang', $('#nguoidang').val());
-                 data.append('idtin', $('#idtin').val())
+                data.append('tieude', $('#tieude').val());
+                data.append('loaichothue', $('#loaichothue').val());
+                data.append('tp', $('#tp').val());
+                data.append('tieude', $('#tieude').val());
+                data.append('loaichothue', $('#loaichothue').val());
+                data.append('quan', $('#quan').val());
+                data.append('phuong', $('#phuong').val());
+                data.append('dientich', $('#dientich').val());
+                data.append('gia', $('#gia').val());
+                data.append('mota', $('#mota').val());
+                data.append('tenlienhe', $('#tenlienhe').val());
+                data.append('diachi', $('#diachi').val());
+                data.append('diachill', $('#diachill').val());
+                data.append('dienthoai', $('#dienthoai').val());
+                data.append('ngaybatdau', $('#ngaybatdau').val());
+                data.append('ngayketthuc', $('#ngayketthuc').val());
+                data.append('tongtien', tongtien);
+                data.append('loaitin', loaitin);
+                data.append('email', $('#email').val());
+                data.append('nguoidang', $('#nguoidang').val());
+                data.append('idtin', $('#idtin').val());
+                data.append('giatin', gia);
+                if(changeday2 == true)
+                {
+                  $.ajax({
+                    type:'get',
+                    url:'{{ url("kiemtratien") }}',
+                    data:{tongtien:tongtien},
+                    async: true,
+                    success:function(html){
+                      kt = html;
+                      if(kt == 1)
+                      {
+                        alert('Bạn không đủ tiền để thực hiện việc đăng bài. Vui lòng nạp thêm tiền.')
+                      }
+                      else
+                      {
+                        data.append('tam', 1);
+                        $.ajax({
+                          type:'post',
+                          url:'{{url("postsuatin")}}',
+                          data: data,
+                          processData: false, contentType: false,
+                          async: true,
+                          success:function(html){
+                           alert(JSON.stringify(html));
+                           window.location='{{url("tindadang")}}';
+                         }
+                       });
+                      }
+                    }
+                  });
+                }
+                else
+                {
+                  if(tienthaydoi == true)
+                  {
+                    data.append('tienthaydoi', tienthem );
+                  }
+                  data.append('tam', 0);
+                        $.ajax({
+                          type:'post',
+                          url:'{{url("postsuatin")}}',
+                          data: data,
+                          processData: false, contentType: false,
+                          async: true,
+                          success:function(html){
+                           alert(JSON.stringify(html));
+                           window.location='{{url("tindadang")}}';
+                         }
+                       });
+                }
+                
 
              //  $.ajax({
              //    type:'post',
@@ -720,23 +796,16 @@
              //     alert(html);
              //   }
              // });
-              $.ajax({
-                type:'post',
-                url:'{{url("postsuatin")}}',
-                data: data,
-                processData: false, contentType: false,
-                async: true,
-                success:function(html){
-                 alert(JSON.stringify(html));
-                 window.location='{{url("tindadang")}}';
-               }
-             });
+
             }
           }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip();   
-          var totalDays,gia;
+          var totalDays,gia,checkdate = false,ngaytam;
+          var today = new Date();
+          ngaytam = $('#ngayketthuc').val();
+          ngaytam_date =  new Date($('#ngayketthuc').val())
           $('#tp').on('change',function(){
             if(tp){
               $.ajax({
@@ -784,43 +853,70 @@
             }
           });
           $('#ngaybatdau').on('change',function(){
-            var today = new Date();
             var tam = new Date($('#ngaybatdau').val());
-            if(tam < today)
+            changeday1 = true;
+            if(ngaytam == '')
             {
-              alert('Vui lòng chọn ngày bắt đầu từ hôm nay');
-              document.getElementById("ngaybatdau").valueAsDate = new Date()
-            }
-            if ($('#ngaybatdau').val() > $('#ngayketthuc').val() && $('#ngayketthuc').val() != '')
+              if(tam < today)
               {
-                alert('Vui lòng chọn ngày bắt đầu trước ngày kết thúc');
-                $('#ngayketthuc').val('');
+                alert('Vui lòng chọn ngày bắt đầu từ hôm nay');
+                document.getElementById("ngaybatdau").valueAsDate = new Date();
               }
-          });
-          $('#ngaybatdau-sua').on('change',function(){
-            var today = new Date();
-            var tam = new Date($('#ngaybatdau').val());
-            if ($('#ngaybatdau').val() > $('#ngayketthuc').val() && $('#ngayketthuc').val() != '')
-              {
-                alert('Vui lòng chọn ngày bắt đầu trước ngày kết thúc');
-                $('#ngayketthuc').val('');
-              }
-          });
-          $('#ngayketthuc').on('change',function(){
-            if($('#ngaybatdau').val() == '')
-            {
-              alert('Vui lòng chọn ngày bắt đầu trước');
-              $('#ngayketthuc').val('');
             }
             else
             {
-              if ($('#ngaybatdau').val() > $('#ngayketthuc').val())
+              if ($('#ngaybatdau').val() <= $('#ngayketthuc').val() && $('#ngayketthuc').val() != '' && ngaytam_date > today)
+              {
+                alert('Vui lòng chọn ngày bắt đầu sau ngày kết thúc trước đó');
+                $('#ngaybatdau').val($('#ngayketthuc').val());
+                $('#ngayketthuc').val('');
+              }
+              else
+              {
+                alert('Vui lòng chọn ngày bắt đầu từ hôm nay');
+                document.getElementById("ngaybatdau").valueAsDate = new Date();
+                $('#ngayketthuc').val('');
+              }
+            }
+            if ($('#ngaybatdau').val() >= $('#ngayketthuc').val() && $('#ngayketthuc').val() != '' && checkdate == true)
+              {
+                alert('Vui lòng chọn ngày bắt đầu trước ngày kết thúc');
+                $('#ngayketthuc').val('');
+              }
+          });
+          // $('#ngaybatdau-sua').on('change',function(){
+          //   var today = new Date();
+          //   var tam = new Date($('#ngaybatdau').val());
+          //   if ($('#ngaybatdau').val() > $('#ngayketthuc').val() && $('#ngayketthuc').val() != '')
+          //     {
+          //       alert('Vui lòng chọn ngày bắt đầu trước ngày kết thúc');
+          //       $('#ngayketthuc').val('');
+          //     }
+          // });
+          $('#ngayketthuc').on('change',function(){
+            if($('#ngaybatdau').val() == '' || changeday1 == false)
+            {
+              if(ngaytam != '')
+              {
+                alert('Vui lòng chọn ngày bắt đầu trước');
+                $('#ngayketthuc').val(ngaytam);
+              }
+              else
+              {
+                alert('Vui lòng chọn ngày bắt đầu trước');
+                $('#ngayketthuc').val('');
+              }
+            }
+            else
+            {
+              if ($('#ngaybatdau').val() >= $('#ngayketthuc').val())
               {
                 alert('Vui lòng chọn ngày kết thúc sau ngày bắt đầu');
                 $('#ngayketthuc').val('');
               }
               else
               {
+                gia = $('#loaitin').val().substring(2);
                 var d2 = new Date($('#ngayketthuc').val());
                 var d1 = new Date($('#ngaybatdau').val());
                 var offset = d2.getTime() - d1.getTime();
@@ -831,7 +927,9 @@
                   var tongtien = gia*totalDays;
                   tongtien = format_number(tongtien,0,'.','.');
                   $('#tongtien').html('Tổng tiền: ' +tongtien+' VND');
-                } 
+                }
+                changeday2 = true;
+                checkdate = true;
               }
             }
           });
@@ -850,10 +948,17 @@
               $('#dongia').html('Đơn giá: '+gia_tam+' VND');
               if($('#ngayketthuc').val() != '' && $('#ngaybatdau').val() != '')
               {
-                  var tongtien = gia*totalDays;
-                  tongtien = format_number(tongtien,0,'.','.');
-                  $('#tongtien').html('Tổng tiền: ' +tongtien+' VND');
-              }
+                var d2 = new Date($('#ngayketthuc').val());
+                var d1 = new Date($('#ngaybatdau').val());
+                var offset = d2.getTime() - d1.getTime();
+                total = Math.round(offset / 1000 / 60 / 60 / 24);
+                $('#songaydang').html("Số ngày đăng: " + total + " ngày");
+                var tongtien = gia*total;
+                tongtienin = format_number(tongtien,0,'.','.');
+                $('#tongtien').html('Tổng tiền: ' +tongtienin+' VND');
+                if(changeday2 == false)
+                  tienthaydoi = true;
+                }
           });
           
         });

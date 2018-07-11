@@ -3,7 +3,7 @@
 @section('content')
 <section id="main-content">
   <section class="wrapper">
-    <h3>THỐNG KÊ DOANH THU</h3>
+    <h3>THỐNG KÊ GIAO DỊCH</h3>
 
     <div class="row mt">
       <div class="col-md-12">
@@ -58,37 +58,28 @@
            <thead>
             <tr>
              <th>STT</th>
-             <th>Mã hóa đơn</th>
-             <th>Lô đất</th>
-             <th>Tên khách hàng mua</th>
-             <th>Tên khách hàng mua</th>
+             <th>Giao dịch</th>
+             <th>Người thực hiện</th>
              <th>Ngày lập</th>
-             <th>Phí môi giới</th>
-             <th></th>
+             <th>Số tiền</th>
+             
            </tr>
          </thead>
          <tbody>
           <?php $i=0;$tong =0; ?>
-          @foreach($thongkedoanhthu as $hd)
+          @foreach($thongkegiaodich as $hd)
           <tr>
            <td>{{++$i}}</td>
-           <td>{{$hd->MaHopDong}}</td>
-           <td>{{$hd->KyHieuLoDat}}</td>
-           <td>@foreach ($khachhang as $kh)
-            <?php if($kh->id == $hd->SoHuu) { 
-             echo $kh->HoVaTenDem.' '.$kh->Ten;
-           } ?>
-         @endforeach</td>
-         <td>{{$hd->HoVaTenDem}} {{$hd->Ten}}</td>
-         <td><?php $date=date_create($hd->ngaylap);
+           <td>{{$hd->GiaoDich}}</td>
+           <td>{{$hd->Ten}}</td>
+           <td><?php $date=date_create($hd->ngaylap);
          echo date_format($date,"d/m/Y H:i:s") ?></td>
-         <td>{{number_format($hd->PhiMoiGioi)}}VNĐ</td>
+         <td>{{number_format($hd->TienGiaoDich)}}VNĐ</td>
          
-         <td></td>
           </tr>
-          <?php $tong = $tong + ($hd->PhiMoiGioi) ?>
+          <?php $tong = $tong + ($hd->TienGiaoDich) ?>
           @endforeach
-          <td colspan="6" style="font-weight: bold;text-align: right;">Tổng doanh thu:</td>
+          <td colspan="4" style="font-weight: bold;text-align: right;">Tổng doanh thu:</td>
           <td colspan="1" style="font-weight: bold;font-style: italic;">{{number_format($tong)}}VNĐ</td>
         </tbody>
     
@@ -97,9 +88,9 @@
 </div><!-- /col-md-12 -->
 </div><!-- /row -->
 
-</section><! --/wrapper -->
-</section><!-- /MAIN CONTENT -->
 
+</section>
+</section>
 
 @endsection
 @section('script')

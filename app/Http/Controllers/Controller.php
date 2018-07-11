@@ -19,11 +19,13 @@ use App\PhongChoThue;
 use App\Phuong;
 use App\LoaiChoThue;
 use App\LoaiTin;
+use App\LichSuGiaoDich;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     function __construct()
     {
+        $this->capnhat();
     	$khachhang = KhachHang::all();
         $taikhoan = TaiKhoan::all();
         $dat = Dat::all();
@@ -35,6 +37,7 @@ class Controller extends BaseController
         $phuong = Phuong::all();
         $loaichothue = LoaiChoThue::all();
         $loaitin = LoaiTin::all();
+        $lichsugiaodich = LichSuGiaoDich::all();
     	view()->share('khachhang',$khachhang);
         view()->share('taikhoan',$taikhoan);
         view()->share('dat',$dat);
@@ -46,5 +49,11 @@ class Controller extends BaseController
         view()->share('phuong',$phuong);
         view()->share('loaichothue',$loaichothue);
         view()->share('loaitin',$loaitin);
+        view()->share('lichsugiaodich',$lichsugiaodich);
+    }
+    function capnhat()
+    {
+        $capnhat = new PhongChoThue();
+        $capnhat->capnhat();
     }
 }

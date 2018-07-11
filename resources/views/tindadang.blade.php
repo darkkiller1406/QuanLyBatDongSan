@@ -17,8 +17,8 @@
             <!-- properties -->
             <?php $a=0; ?>
             @foreach ($tindadang as $p)
-            <?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
             <?php if($p->TrangThai == 1) { ?>
+              <?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
               <div class="col-lg-12 col-sm-12">
                 <div class="properties" style="text-align: left;">
                   <p class="price-rent"><a  href="chitietphong/{{$p->ID}}" class="vip">{{$p->TieuDe}}</a></p>
@@ -53,13 +53,13 @@
   <div class="panel panel-default">
     <div class="panel-heading" style="font-size: 20px;font-weight: bold;">TIN ĐÃ ĐĂNG</div>
     <div class="panel-body">
-      <div class="col-lg-10 col-sm-12">
+      <div class="col-lg-12 col-sm-12">
         <div class="row"">
           <!-- properties -->
           <?php $a=0; ?>
           @foreach ($tindadang as $p)
-          <?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
           <?php if($p->TrangThai == 2) { ?>
+            <?php if($a==0) {$a++;} else { ?> <hr> <?php } ?>
             <div class="col-lg-12 col-sm-12" style="padding-bottom: 15px;">
               <div class="properties" style="text-align: left;">
                 <p class="price-rent"><a  href="chitietphong/{{$p->ID}}" class="vip">{{$p->TieuDe}}</a></p>
@@ -79,7 +79,8 @@
                       <b>Ngày đăng</b>: {{$date->format('d/m/Y')}}
                     </div>
                     <div class="col-md-12"><p class="price-red">Giá: {{$p->GiaThue}} Triệu/Tháng</p></div>
-                    <a class="btn btn-detail" href="giahan/{{$p->ID}}">GIA HẠN</a>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2"><a class="btn btn-basic" href="chinhsuatindang/{{$p->ID}}">GIA HẠN</a></div>
                   </div>
                 </div>
               </div>

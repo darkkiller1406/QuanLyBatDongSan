@@ -65,6 +65,8 @@
 							<?php if(Auth::check()) { ?>
 									<li><a>XIN CHÀO {{Auth::user()->Ten}}</a>
 										<ul class="sub-menu">
+											<li style="margin-top: 10px;">TIỀN: {{number_format(Auth::user()->Tien)}} VNĐ</li>
+											<hr>
 											<li><a href="{{route('view_dangtin')}}" class="{{ (\Request::route()->getName() == 'view_dangtin') ? 'active' : '' }}">ĐĂNG TIN</a>
 												<hr>
 											<li><a href="{{route('view_trangcanhan')}}" style="padding-bottom: 20px;">TÀI KHOẢN</a></li>
