@@ -1,4 +1,4 @@
-@section('title','Chi tiết')
+@section('title','Quản lý tin')
 @extends('layout.master_ban')
 @section('content')
 <div class="inside-banner">

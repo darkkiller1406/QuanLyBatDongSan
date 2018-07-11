@@ -5,7 +5,7 @@ font-family: 'Open Sans', sans-serif;
 
 }
 
-body {	color:#555;	font:normal 13px/22px Open Sans;	background:url(../img/bgmain.png) #eee;}
+body {	color:#555;	font:normal 13px/22px Open Sans;	background: #FFFF;}
 
 h1,h2,h3,h4,h5,h6 { font-weight:normal; font-family: Open Sans;margin: 0;padOpen Sansg: 0;color: #000}
 h1{font-size: 60px; margin-bottom: 25px;color: #fff;}
@@ -439,4 +439,17 @@ hr {
 {
   margin-bottom: 10px;
   color: red;
+}
+.thongtin
+{
+  font-size: 15px;
+}
+.thongtin p
+{
+  margin-bottom: 10px;
+}
+.control-label-form
+{
+  font-size: 15px;
+  padding-top: 5px;
 }

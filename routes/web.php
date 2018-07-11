@@ -58,6 +58,12 @@ Route::any('timphuong','QL_DatController@timPhuong');
 Route::any('tindadang','QL_ChoThueController@getViewTinDaDang')->name('view_tindadang');
 
 Route::any('timphong', 'QL_ChoThueController@timPhong')->name('timPhong');
+
+Route::any('quanlytrangcanhan', 'QL_TaiKhoanController@trangcanhan')->name('view_trangcanhan');
+
+Route::any('naptien','QL_TaiKhoanController@postNapTien')->name('post_naptien');
+
+Route::any('capnhatmk','QL_TaiKhoanController@postCapNhatMK')->name('post_CapNhatMK');
 // page admin
 Route::get('page/dangnhap', 'QL_DangNhapController@getView');
 Route::post('page/dangnhap', 'QL_DangNhapController@getDangNhap');

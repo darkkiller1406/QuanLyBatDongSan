@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\TaiKhoan;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class QL_TaiKhoanController extends Controller
 {
     //
@@ -89,7 +89,34 @@ class QL_TaiKhoanController extends Controller
             return redirect('page/doimatkhau')->with('canhbao','Mật khẩu không đúng !');
             }
         }
-        
-        
     }
+    public function postCapNhatMK(Request $request)
+    {
+        $id = $request->iduser;
+        $passnew = bcrypt($request->passnew);
+        $passold = $request->passold;
+        $test = new TaiKhoan;
+        $t = $test->updateMK($id,$passold,$passnew);
+        return $t;
+    }
+    public function postNapTien(Request $request)
+    {
+        $id = $request->iduser;
+        $pass = $request->pass;
+        $tien = $request->tien;
+        $test = new TaiKhoan;
+        $t = $test->updateTien($id,$pass,$tien);
+        return $t;
+    }
+    public function trangcanhan()
+    {
+        if(isset(Auth::user()->id))
+        {
+            $thongtin = TaiKhoan::find(Auth::user()->id);
+            $sobaidang = new TaiKhoan();
+            $sobaidang = $sobaidang->demsobai(Auth::user()->id);
+            return view('trangcanhan',['thongtin'=>$thongtin,'sobaidang'=>$sobaidang]);
+        }
+    }
+        
 }
