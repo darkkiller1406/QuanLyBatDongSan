@@ -495,3 +495,22 @@ hr {
     border-left: 1px solid #EE7621;
     border-right: 1px solid #EE7621;
 }
+.table-gia{
+    width:100%;
+}
+.table-gia th,td{
+    padding:7px 15px;
+     border:1px solid gray;
+    border-collapse: collapse;
+    text-align: center;
+}
+.table-gia th{
+    background-color: #3c3c3c;
+    color:#FFD700
+}
+.table-gia tr:nth-child(even){
+   background-color: #F0F0F0;
+}
+.table-gia tr:hover{
+    background-color: #ddd;
+}
