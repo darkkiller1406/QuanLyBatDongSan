@@ -53,6 +53,7 @@ class QL_ChoThueController extends Controller
         //
         $lichsu = new LichSuGiaoDich();
         $lichsu->TienGiaoDich =  $r->tongtien;
+        $lichsu->LoaiGiaoDich = '1';
         $lichsu->GiaoDich = 'Thực hiện đăng tin mới';
         $lichsu->NguoiThucHien = Auth::user()->id;
         $lichsu->save();
@@ -132,6 +133,7 @@ class QL_ChoThueController extends Controller
             //
             $lichsu = new LichSuGiaoDich();
             $lichsu->TienGiaoDich =  $r->tienthaydoi;
+            $lichsu->LoaiGiaoDich = '1';
             $lichsu->GiaoDich = 'Thực hiện thay đổi loại tin';
             $lichsu->NguoiThucHien = Auth::user()->id;
             $lichsu->save();
@@ -149,6 +151,7 @@ class QL_ChoThueController extends Controller
             //
             $lichsu = new LichSuGiaoDich();
             $lichsu->TienGiaoDich =  $r->tongtien;
+            $lichsu->LoaiGiaoDich = '1';
             $lichsu->GiaoDich = 'Thực hiện gia hạn ngày đăng';
             $lichsu->NguoiThucHien = Auth::user()->id;
             $lichsu->save();

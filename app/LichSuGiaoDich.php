@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class LichSuGiaoDich extends Model
@@ -11,5 +11,9 @@ class LichSuGiaoDich extends Model
     public function nguoithuchien()
     {
         return $this->belongsTo('App\TaiKhoan','NguoiThucHien','id');
+    }
+    public function getLichSuGiaoDich($id)
+    {
+    	return DB::select("SELECT * FROM lichsugiaodich WHERE lichsugiaodich.NguoiThucHien = ".$id);
     }
 }

@@ -19,8 +19,8 @@ class ThongKe extends Model
     {
     	
     	if(isset($thang)&&isset($nam)){
-    		return DB::select("SELECT *,lichsugiaodich.created_at as ngaylap  FROM lichsugiaodich,users WHERE MONTH(lichsugiaodich.created_at) = '$thang' and  YEAR(lichsugiaodich.created_at) = '$nam' and lichsugiaodich.NguoiThucHien = users.id");
+    		return DB::select("SELECT *,lichsugiaodich.created_at as ngaylap  FROM lichsugiaodich,users WHERE MONTH(lichsugiaodich.created_at) = '$thang' and  YEAR(lichsugiaodich.created_at) = '$nam' and lichsugiaodich.NguoiThucHien = users.id and lichsugiaodich.LoaiGiaoDich = 1 ");
     	}
-    	return DB::select("SELECT *,lichsugiaodich.created_at as ngaylap  FROM lichsugiaodich,users WHERE MONTH(lichsugiaodich.created_at) = MONTH(now()) and YEAR(lichsugiaodich.created_at) = YEAR(now()) and lichsugiaodich.NguoiThucHien = users.id");
+    	return DB::select("SELECT *,lichsugiaodich.created_at as ngaylap  FROM lichsugiaodich,users WHERE MONTH(lichsugiaodich.created_at) = MONTH(now()) and YEAR(lichsugiaodich.created_at) = YEAR(now()) and lichsugiaodich.NguoiThucHien = users.id and lichsugiaodich.LoaiGiaoDich = 1");
     }
 }

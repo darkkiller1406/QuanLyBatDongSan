@@ -28,7 +28,7 @@ select,input{outline: 0; margin-bottom: 20px;}
 a.more{background-color: #222; padOpen Sansg: 2px 6px;color: #fff; text-transform: uppercase; font-size: 11px;}
 a.more:hover{background: #64a30a;text-decoration: none;}
 
-table{background-color: #fff;}
+table{background-color: #fff;font-size: 15px;text-align: center;}
 
 .btn{border-radius: 5px; font-family: Open Sans; outline: none;}
 .btn-success{ background: #72b70f;border:1px solid #72b70f;padOpen Sansg:6px 20px; width: 100%; font-family: 'Bariol_Regular'; font-size: 15px; border-radius: 5px;}
@@ -353,6 +353,7 @@ a, a:hover{
    list-style: none;
    padding-top: 20px;
    margin-left: 15px;
+   padding-bottom: 20px;
 }
 .nav>li:hover .sub-menu {
   display: block;
@@ -436,7 +437,6 @@ hr {
   margin-bottom: 10px;
   color: red;
 }
-<<<<<<< HEAD
 .thongtin
 {
   font-size: 15px;
@@ -449,7 +449,7 @@ hr {
 {
   font-size: 15px;
   padding-top: 5px;
-=======
+}
 .vip1
 {
   color: red;
@@ -494,5 +494,4 @@ hr {
     border-bottom: 1px solid #EE7621;
     border-left: 1px solid #EE7621;
     border-right: 1px solid #EE7621;
->>>>>>> bf0bf28700ece6f8b2ce1e251de2f1f6c82bfc11
 }

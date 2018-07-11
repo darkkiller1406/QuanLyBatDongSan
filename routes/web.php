@@ -66,6 +66,8 @@ Route::any('quanlytrangcanhan', 'QL_TaiKhoanController@trangcanhan')->name('view
 Route::any('naptien','QL_TaiKhoanController@postNapTien')->name('post_naptien');
 
 Route::any('capnhatmk','QL_TaiKhoanController@postCapNhatMK')->name('post_CapNhatMK');
+
+Route::get('lichsugiaodich/{id}','QL_TaiKhoanController@getLichSu');
 // page admin
 Route::get('page/dangnhap', 'QL_DangNhapController@getView');
 Route::post('page/dangnhap', 'QL_DangNhapController@getDangNhap');

@@ -5,6 +5,7 @@ use App\User;
 use App\TaiKhoan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\LichSuGiaoDich;
 class QL_TaiKhoanController extends Controller
 {
     //
@@ -106,6 +107,13 @@ class QL_TaiKhoanController extends Controller
         $tien = $request->tien;
         $test = new TaiKhoan;
         $t = $test->updateTien($id,$pass,$tien);
+        //
+        $lichsu = new LichSuGiaoDich();
+        $lichsu->TienGiaoDich =  $request->tien;
+        $lichsu->LoaiGiaoDich = '2';
+        $lichsu->GiaoDich = 'Nạp thêm tiền';
+        $lichsu->NguoiThucHien = Auth::user()->id;
+        $lichsu->save();
         return $t;
     }
     public function trangcanhan()
@@ -117,6 +125,12 @@ class QL_TaiKhoanController extends Controller
             $sobaidang = $sobaidang->demsobai(Auth::user()->id);
             return view('trangcanhan',['thongtin'=>$thongtin,'sobaidang'=>$sobaidang]);
         }
+    }
+    public function getLichSu($id)
+    {
+        $lichsu = new LichSuGiaoDich();
+        $lichsu = $lichsu->getLichSuGiaoDich($id);
+        return view('lichsugiaodich',['lichsugiaodich'=>$lichsu]);
     }
         
 }

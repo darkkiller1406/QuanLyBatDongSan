@@ -26,6 +26,7 @@
               <p>Ngày tạo: <?php $date=date_create($thongtin->created_at);echo date_format($date,"d/m/Y H:i:s") ?></p>    
               <p>Số bài đăng: {{$sobaidang}}</p>
               <p>Tiền hiện có: {{number_format($thongtin->Tien)}} VNĐ</p>
+              <p><a href="lichsugiaodich/{{Auth::user()->id}}">Lịch sử giao dịch</a></p>
             </div>
           </div>
         </div>
