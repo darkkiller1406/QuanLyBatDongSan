@@ -26,6 +26,7 @@
             {{ session('canhbao') }}
           </div>
           @endif
+          <div class="col-md-10">
           <form method="post" action="{{route('TKDT')}}">
             {{csrf_field()}}
             <div class="form-group">
@@ -53,6 +54,18 @@
               <div class="col-md-3 col-sm-2 control-label"><button type="submit" class="btn btn-theme"><i class="fas fa-search"></i></button></div>
             </div>
           </form>
+        </div>
+          <div class="col-md-2">
+            <div class="col-md-8"></div>
+            <div class="form-group">
+            <form method="post" action="{{route('inDT')}}">
+              {{csrf_field()}}
+              <input type="hidden" name="thangin" value="{{$month}}">
+              <input type="hidden" name="namin" value="{{$year}}">
+              <div class="col-md-1 col-sm-1 control-label"><button type="submit" class="btn btn-theme"><i class="fas fa-print"></i></button></div>
+            </div>
+          </form>
+          </div>
           <table id="dtable" class="table table-striped table-advance table-hover table-ed">
            <hr>
            <thead>
@@ -64,7 +77,6 @@
              <th>Tên khách hàng mua</th>
              <th>Ngày lập</th>
              <th>Phí môi giới</th>
-             <th></th>
            </tr>
          </thead>
          <tbody>
@@ -83,8 +95,6 @@
          <td><?php $date=date_create($hd->ngaylap);
          echo date_format($date,"d/m/Y H:i:s") ?></td>
          <td>{{number_format($hd->PhiMoiGioi)}}VNĐ</td>
-         
-         <td></td>
           </tr>
           <?php $tong = $tong + ($hd->PhiMoiGioi) ?>
           @endforeach

@@ -26,10 +26,11 @@
             {{ session('canhbao') }}
           </div>
           @endif
-          <form method="post" action="{{route('TKDT')}}">
+          <div class="col-md-10">
+            <form method="post" action="{{route('TKDT')}}">
             {{csrf_field()}}
             <div class="form-group">
-              <div class="col-md-3 col-sm-3 control-label"></div>
+              <div class="col-md-4 col-sm-4 control-label"></div>
               <div class="col-md-2">
                 <div class="form-group">
                   <select class="form-control" name="thang">
@@ -50,9 +51,23 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-3 col-sm-2 control-label"><button type="submit" class="btn btn-theme"><i class="fas fa-search"></i></button></div>
+              <div class="col-md-2 col-sm-2 control-label"><button type="submit" class="btn btn-theme"><i class="fas fa-search"></i></button></div>
             </div>
           </form>
+          </div>
+          <div class="col-md-2">
+            <div class="col-md-8"></div>
+            <div class="form-group">
+            <form method="post" action="{{route('inGD')}}">
+              {{csrf_field()}}
+              <input type="hidden" name="thangin" value="{{$month}}">
+              <input type="hidden" name="namin" value="{{$year}}">
+              <div class="col-md-1 col-sm-1 control-label"><button type="submit" class="btn btn-theme"><i class="fas fa-print"></i></button></div>
+            </div>
+          </form>
+          </div>
+          
+         
           <table id="dtable" class="table table-striped table-advance table-hover table-ed">
            <hr>
            <thead>

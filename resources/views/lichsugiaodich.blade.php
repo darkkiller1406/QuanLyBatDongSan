@@ -10,7 +10,7 @@
   <div class="properties-listing spacer">
     <div class="row">
       <div class="col-lg-12">
-        <table id="dtable" class="table table-responsive">
+        <table id="dtable" class="table-gia table-responsive">
          <thead>
           <tr>
            <th style="text-align: center;">STT</th>

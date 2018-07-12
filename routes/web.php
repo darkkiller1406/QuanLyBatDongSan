@@ -115,5 +115,7 @@ Route::group(['prefix' => 'page','middleware'=>'Adminlogin'], function() {
     //
     Route::any('thongkedoanhthu','ThongKeController@getThongKeDoanhThu')->name('TKDT');
     Route::any('thongkegiaodich','ThongKeController@getThongKeGiaoDich')->name('TKGD');
-
+    //
+    Route::any('pdfgiaodich','PDFController@pdf_giaodich')->name('inGD');
+    Route::any('pdfdoanhthu','PDFController@pdf_doanhthu')->name('inDT');
  });
