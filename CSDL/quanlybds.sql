@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 02, 2018 lúc 10:26 AM
+-- Thời gian đã tạo: Th7 12, 2018 lúc 10:07 AM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.1
 
@@ -122,6 +122,37 @@ INSERT INTO `khachhang` (`id`, `MaKhachHang`, `XungHo`, `HoVaTenDem`, `Ten`, `DT
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `lichsugiaodich`
+--
+
+CREATE TABLE `lichsugiaodich` (
+  `id` int(11) NOT NULL,
+  `TienGiaoDich` double NOT NULL,
+  `GiaoDich` varchar(500) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `LoaiGiaoDich` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `NguoiThucHien` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `lichsugiaodich`
+--
+
+INSERT INTO `lichsugiaodich` (`id`, `TienGiaoDich`, `GiaoDich`, `LoaiGiaoDich`, `created_at`, `updated_at`, `NguoiThucHien`) VALUES
+(1, 80000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-08 13:51:51', '2018-07-12 05:05:52', 2),
+(2, 20000, 'Thực hiện thay đổi loại tin', 1, '2018-07-08 15:20:22', '2018-07-12 05:05:52', 2),
+(3, 250000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-08 15:26:19', '2018-07-12 05:05:52', 2),
+(4, 120000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-08 15:43:27', '2018-07-12 05:05:52', 2),
+(5, 30000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-09 12:00:52', '2018-07-12 05:05:52', 2),
+(6, 20000, 'Nạp thêm tiền', 2, '2018-07-12 12:06:56', '2018-07-12 05:06:56', 2),
+(7, 50000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:05', '2018-07-12 05:07:05', 2),
+(8, 100000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:14', '2018-07-12 05:07:14', 2),
+(9, 500000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:23', '2018-07-12 05:07:23', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `loaichothue`
 --
 
@@ -159,7 +190,9 @@ CREATE TABLE `loaitin` (
 --
 
 INSERT INTO `loaitin` (`id`, `LoaiTin`, `Gia`, `ThongTin`) VALUES
-(1, 'VIP 1', 50000, 'abc');
+(1, 'VIP 1', 50000, 'Là loại tin được đăng tiêu đề bằng chữ IN HOA MÀU ĐỎ, khung màu đỏ, nằm ở trên các tin vip 2'),
+(2, 'VIP 2', 40000, 'Là loại tin đăng bằng chữ IN HOA MÀU CAM, khung màu cam, nằm bên dưới tin VIP 1 và ở trên các tin VIP 3'),
+(3, 'VIP 3', 30000, 'Là loại tin đăng bằng chữ thường màu cam, khung màu cam và luôn nằm dưới tin Vip 2 nhưng luôn luôn hiển thị trên tin thường.');
 
 -- --------------------------------------------------------
 
@@ -172,6 +205,7 @@ CREATE TABLE `phongthue` (
   `TieuDe` varchar(1000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Phuong` int(11) NOT NULL,
   `DiaChi` varchar(500) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Map` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `DienTich` int(11) NOT NULL,
   `Gia` double NOT NULL,
   `MoTa` varchar(2000) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -182,6 +216,7 @@ CREATE TABLE `phongthue` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TrangThai` int(11) NOT NULL,
+  `TienCu` double NOT NULL,
   `TongTien` double NOT NULL,
   `NgayBatDau` datetime NOT NULL,
   `NgayKetThuc` datetime NOT NULL,
@@ -195,9 +230,9 @@ CREATE TABLE `phongthue` (
 -- Đang đổ dữ liệu cho bảng `phongthue`
 --
 
-INSERT INTO `phongthue` (`id`, `TieuDe`, `Phuong`, `DiaChi`, `DienTich`, `Gia`, `MoTa`, `HinhAnh`, `LoaiTin`, `LoaiChoThue`, `NguoiDang`, `created_at`, `updated_at`, `TrangThai`, `TongTien`, `NgayBatDau`, `NgayKetThuc`, `TenLienHe`, `DiaChiLienLac`, `DienThoaiLienLac`, `Email`) VALUES
-(1, 'Cho người nước ngoài thuê phòng đầy đủ trang bị và tiện ích, trung tâm quận 1', 11, 'Đường Nguyễn Thị Nghĩa', 18, 5, 'Room for rent , full equipments and comforts . In the centre of distric 1 . Place is security and quiet , to much foreigner rent the room .\r\nThe area 18 , 25 m2 . Payment more electric fee only ( 3000 VNĐ/ Kw) . Wifi , water free . Add more two drinking water cans free . During of rental at least 3 months .', 'IMG_1_1.jpg;IMG_1_2.jpg;IMG_1_3.jpg;IMG_1_4.jpg;', 1, 1, 2, '2018-06-28 06:16:00', '2018-07-01 09:06:48', 1, 250000, '2018-07-01 00:00:00', '2018-07-06 00:00:00', 'Minh', '163 Tô Hiến Thành,Phường 13, Quận 10, Hồ Chí Minh ', '01869885811', 'darkkiller1406@yahoo.com'),
-(3, 'Cho thuê phòng trọ mới, giờ giấc tự do.134 Đinh Tiên Hoàng, Q.1. Liên hệ a.Tâm 0934898020', 5, '134 Đường Đinh Tiên Hoàng', 18, 3, 'Nhà còn 10 phòng cho thuê\r\n* Diện tích 18m2 - 24m2.\r\n* Giá: 3,2tr - 4,2tr/tháng.\r\n* Phòng có máy lạnh,máy nước nóng, ban công, cửa sổ, bếp, wifi, cáp.\r\n* Không chung chủ, giờ giấc tự do thoải mái.\r\n* Chổ đậu xe free và an toàn, lối đi riêng, chỗ phơi đồ.\r\n* Thuận tiện đi lại quận 1,2,3,4 Tân Bình,Gò Vấp,Bình Thạnh...\r\n* Thích hợp cho nhân viên văn phòng, dân trí thức, sinh viên it người ở.\r\n- Điện: 3,5 nghìn/kw.\r\n- Nước: 90 nghìn/người.', 'IMG_2_4.jpeg;IMG_2_3.jpeg;IMG_2_2.jpeg;IMG_2_1.jpeg;', 1, 1, 2, '2018-07-01 09:01:10', '2018-07-02 06:28:44', 1, 100000, '2018-07-01 00:00:00', '2018-07-03 00:00:00', 'A.Tâm', '134 Đinh Tiên Hoàng-Phường Đa Kao, Q.1', '0934898020', 'minh.1406@gmail.com');
+INSERT INTO `phongthue` (`id`, `TieuDe`, `Phuong`, `DiaChi`, `Map`, `DienTich`, `Gia`, `MoTa`, `HinhAnh`, `LoaiTin`, `LoaiChoThue`, `NguoiDang`, `created_at`, `updated_at`, `TrangThai`, `TienCu`, `TongTien`, `NgayBatDau`, `NgayKetThuc`, `TenLienHe`, `DiaChiLienLac`, `DienThoaiLienLac`, `Email`) VALUES
+(1, 'Cho người nước ngoài thuê phòng đầy đủ trang bị và tiện ích, trung tâm quận 1', 11, '19 Nguyễn Thị Nghĩa', '10.77048963737413;106.69396025396736', 20, 5, 'Room for rent , full equipments and comforts . In the centre of distric 1 . Place is security and quiet , to much foreigner rent the room .\r\nThe area 18 , 25 m2 . Payment more electric fee only ( 3000 VNĐ/ Kw) . Wifi , water free . Add more two drinking water cans free . During of rental at least 3 months .', 'IMG_1_1.jpg;IMG_1_2.jpg;IMG_1_3.jpg;IMG_1_4.jpg;', 1, 1, 2, '2018-06-28 06:16:00', '2018-07-12 07:39:39', 1, 0, 250000, '2018-07-09 00:00:00', '2018-07-20 00:00:00', 'Minh', '163 Tô Hiến Thành,Phường 13, Quận 10, Hồ Chí Minh', '018698858112', 'darkkiller1406@yahoo.com'),
+(3, 'Cho thuê phòng trọ mới, giờ giấc tự do.134 Đinh Tiên Hoàng, Q.1. Liên hệ a.Tâm 0934898020', 1, '134 Đường Đinh Tiên Hoàng', '10.791498;106.696803', 18, 3, 'Nhà còn 10 phòng cho thuê\r\n* Diện tích 18m2 - 24m2.\r\n* Giá: 3,2tr - 4,2tr/tháng.\r\n* Phòng có máy lạnh,máy nước nóng, ban công, cửa sổ, bếp, wifi, cáp.\r\n* Không chung chủ, giờ giấc tự do thoải mái.\r\n* Chổ đậu xe free và an toàn, lối đi riêng, chỗ phơi đồ.\r\n* Thuận tiện đi lại quận 1,2,3,4 Tân Bình,Gò Vấp,Bình Thạnh...\r\n* Thích hợp cho nhân viên văn phòng, dân trí thức, sinh viên it người ở.\r\n- Điện: 3,5 nghìn/kw.\r\n- Nước: 90 nghìn/người.', 'IMG_2_4.jpeg;IMG_2_3.jpeg;IMG_2_2.jpeg;IMG_2_1.jpeg;', 3, 1, 2, '2018-07-01 09:01:10', '2018-07-12 08:06:06', 2, 220000, 250000, '2018-07-01 00:00:00', '2018-07-10 00:00:00', 'A.Tâm', '134 Đinh Tiên Hoàng-Phường Đa Kao, Q.1', '0934898020', 'minh.1406@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -298,8 +333,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `Quyen`, `Ten`, `Tien`) VALUES
-(1, 'admin', 'minh.1406.nt@gmail.com', '$2y$10$licDAaU1z3WI.akCBnytmeo59Uw4wj6puHqdW9UFM7tp5bAIPQzm6', '0Hjvmc8tJ3xgffzXkTc6bDj8Ohcyuf3JE1PnjUb5LVXUt2mBNTbWfucMqEqW', '2018-05-21 09:03:26', '2018-07-02 08:17:57', 1, 'Admin', 0),
-(2, 'congminh', 'darkkiller1406@yahoo.com', '$2y$10$IuHVECWVhbUpFbMGYMm/UOoLKEVWphneTMvmB6sDGhJj/Q41XIoPS', 'CUhbl0RE9Ruo1up1Pot3dbr9tAB2ZJrJD1SHaNIexH7uSAtzWKq36NsUmj62', '2018-05-21 09:20:52', '2018-07-02 08:19:33', 2, 'Công Minh', 500000);
+(1, 'admin', 'minh.1406.nt@gmail.com', '$2y$10$licDAaU1z3WI.akCBnytmeo59Uw4wj6puHqdW9UFM7tp5bAIPQzm6', 'OHcW2zvULUKh21SZRxBPSiZyfioj341zTcQlFQ73GxbfeFfmwk518WQ7eVn3', '2018-05-21 09:03:26', '2018-07-12 05:02:57', 1, 'Admin', 0),
+(2, 'congminh', 'darkkiller1406@yahoo.com', '$2y$10$IuHVECWVhbUpFbMGYMm/UOoLKEVWphneTMvmB6sDGhJj/Q41XIoPS', 'Rh5Oie5hJ4qzjYsln82kVIkM0PXCT0xHiioiNfOmFTsd2e5DamfAayWdVdyF', '2018-05-21 09:20:52', '2018-07-12 05:07:23', 2, 'Công Minh', 670000);
 
 -- --------------------------------------------------------
 
@@ -356,6 +391,13 @@ ALTER TABLE `hopdong`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `lichsugiaodich`
+--
+ALTER TABLE `lichsugiaodich`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `NguoiThucHien` (`NguoiThucHien`);
 
 --
 -- Chỉ mục cho bảng `loaichothue`
@@ -436,6 +478,12 @@ ALTER TABLE `khachhang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT cho bảng `lichsugiaodich`
+--
+ALTER TABLE `lichsugiaodich`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT cho bảng `loaichothue`
 --
 ALTER TABLE `loaichothue`
@@ -445,7 +493,7 @@ ALTER TABLE `loaichothue`
 -- AUTO_INCREMENT cho bảng `loaitin`
 --
 ALTER TABLE `loaitin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `phongthue`
@@ -500,6 +548,12 @@ ALTER TABLE `dat`
 ALTER TABLE `hopdong`
   ADD CONSTRAINT `hopdong_ibfk_3` FOREIGN KEY (`ID_Dat`) REFERENCES `dat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `hopdong_ibfk_4` FOREIGN KEY (`ID_KhachHang_Mua`) REFERENCES `khachhang` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `lichsugiaodich`
+--
+ALTER TABLE `lichsugiaodich`
+  ADD CONSTRAINT `lichsugiaodich_ibfk_1` FOREIGN KEY (`NguoiThucHien`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `phongthue`
