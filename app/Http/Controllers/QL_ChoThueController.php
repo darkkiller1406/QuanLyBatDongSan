@@ -59,14 +59,13 @@ class QL_ChoThueController extends Controller
         $lichsu->save();
         //
         $date = date('d');
-        $datestart = substr($r->ngaybatdau,8);
+         $datestart = substr($r->ngaybatdau,8);
         if($date == $datestart)
         {
             $date = date('Y-m-d H:i:s');
             $p->NgayBatDau =  $date;
-            $gia = $r->giatin;
             $tongtien = ($r->tongtien);
-            $tongngay = $tongtien/$gia;
+            $tongngay = $r->tongngay;
             $p->NgayKetThuc = date("Y-m-d H:i:s", strtotime($date . "+".$tongngay." day"));
             $p->TrangThai = '1';
         }
@@ -81,18 +80,19 @@ class QL_ChoThueController extends Controller
         $p->LoaiChoThue = $r->loaichothue;
         $p->Phuong = $r->phuong;
         $p->DienTich = $r->dientich;
+        if(isset($r->MoTa)){$p->MoTa = $r->mota;}
         $p->Gia = $r->gia;
-        $p->MoTa = $r->mota;
         $p->Map = $r->map;
         $p->TongTien = $r->tongtien;
         $p->TienCu = '0';
         $p->Loaitin = $r->loaitin;
         $p->NguoiDang = $r->nguoidang;
+        $p->DiaChiLienLac = $r->diachill;
+        $p->Email = $r->email;
         $p->DiaChi = $r->diachi;
         $p->TenLienHe = $r->tenlienhe;
-        $p->DiaChiLienLac = $r->diachill;
         $p->DienThoaiLienLac = $r->dienthoai;
-        $p->Email = $r->email;
+        
         $p->save();
         return ('Đăng tin thành công.');
         
@@ -170,11 +170,19 @@ class QL_ChoThueController extends Controller
             $gia = $r->giatin;
             $tongtien = $r->tongtien;
             $tongngay = $tongtien/$gia;
-            $p->NgayKetThuc = date("Y-m-d H:i:s", strtotime($date . "+".$tongngay." day"));;
+            $p->NgayKetThuc = date("Y-m-d H:i:s", strtotime($date . "+".$tongngay." day"));
         }
         else
         {
-            $p->NgayKetThuc = $r->ngayketthuc;
+            if($p->TrangThai == 2)
+            {
+                $p->NgayBatDau = $r->ngaybatdau;
+                $p->NgayKetThuc = $r->ngayketthuc;
+            }
+            else
+            {
+                $p->NgayKetThuc = $r->ngayketthuc;
+            }
         }
         // lưu vào csdl
         $p->TieuDe = $r->tieude;

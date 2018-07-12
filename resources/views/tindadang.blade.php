@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading" style="font-size: 20px;font-weight: bold;">TIN ĐÃ ĐĂNG</div>
+    <div class="panel-heading" style="font-size: 20px;font-weight: bold;">TIN CHƯA ĐĂNG</div>
     <div class="panel-body">
       <div class="col-lg-12 col-sm-12">
         <div class="row"">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-12"><p class="price-red">Giá: {{$p->GiaThue}} Triệu/Tháng</p></div>
                     <div class="col-md-5"></div>
-                    <div class="col-md-2"><a class="btn btn-basic" href="chinhsuatindang/{{$p->ID}}">GIA HẠN</a></div>
+                    <div class="col-md-2"><a class="btn btn-basic" href="chinhsuatindang/{{$p->ID}}">CẬP NHẬT</a></div>
                   </div>
                 </div>
               </div>

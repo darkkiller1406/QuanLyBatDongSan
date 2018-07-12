@@ -56,6 +56,7 @@
               <div class="panel panel-default">
                   <div class="panel-heading" style="font-size: 20px;font-weight: bold;">THÔNG TIN CƠ BẢN</div>
                   <input type="hidden" name="idtin" value="{{$kq->id}}" id="idtin" required>
+                  <input type="hidden" value="{{$kq->TrangThai}}" id="trangthai" >
                   <div class="panel-body">
                      <div class="col-lg-12">
                    <label class="col-lg-2 lease-label margin-lable">Tiêu đề</label>
@@ -206,7 +207,7 @@
                    <label class="col-lg-4 lease-label" id="dongia">Đơn giá: {{$gia}} VNĐ</label>
                    <label class="col-lg-4 lease-label" id="songaydang">Số ngày đăng: {{$songaydang}}</label>
                    <label class="col-lg-4 lease-label" id="tongtien">Tổng tiền: {{$kq->TongTien}}</label>
-                   <input type="hidden" name="tongtiencu" value="{{$kq->TienCu}}" id="tongtiencu" required>
+                   <input type="hidden" name="tongtien" value="{{$kq->TongTien}}" id="tongtien" required>
                  </div>
                  </div>
              </div>
@@ -445,7 +446,7 @@
       position: options.position,
       map: map,
       zoom: 19,
-      icon: "../img/gps.png",
+      icon: "{{url("img/gps.png")}}",
       draggable: true
     });
     /* Dragend Marker */ 
@@ -478,7 +479,7 @@
   var infowindow = new google.maps.InfoWindow();
   marker = new google.maps.Marker({
     map: map,
-    icon: "../img/gps.png",
+    icon: "{{url("img/gps.png")}}",
     anchorPoint: new google.maps.Point(0, -29),
     draggable: true
   });
@@ -508,7 +509,7 @@
       map.setZoom(17); // Why 17? Because it looks good.
     }
     marker.setIcon( /** @type {google.maps.Icon} */ ({
-      url: "../img/gps.png"
+      url: "{{url("img/gps.png")}}"
     }));
     document.getElementById('txtlat').value = place.geometry.location.lat();
     document.getElementById('txtlng').value = place.geometry.location.lng();
@@ -543,9 +544,6 @@
   });
 
 }
-
-
-// google.maps.event.addDomListener(window, 'load', initialize);
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          $.ajaxSetup({
                 headers: {
@@ -593,12 +591,6 @@
               $('#ktdiachi').html('*Vui lòng nhập địa chỉ liên lạc');
               check++;
             }
-            if($('#diachill').val() == '')
-            {
-              document.getElementById("diachill").style.marginBottom = "0";
-              $('#ktdiachill').html('*Vui lòng nhập địa chỉ liên lạc');
-              check++;
-            }
             if($('#dienthoai').val() == '')
             {
               document.getElementById("dienthoai").style.marginBottom = "0";
@@ -619,13 +611,7 @@
                 $('#ktdtdd').html('');
               }
             }
-            if($('#email').val() == '')
-            {
-              document.getElementById("email").style.marginBottom = "0";
-              $('#ktemail').html('*Vui lòng nhập email');
-              check++;
-            }
-            else
+            if($('#email').val() != '')
             {
               var email = document.getElementById('email'); 
               var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
@@ -672,94 +658,68 @@
 
             if(check == 0)
             {
-                var tongtien;
-                var gia = $('#loaitin').val().substring(2);
-                var d2 = new Date($('#ngayketthuc').val());
-                var d1 = new Date($('#ngaybatdau').val());
-                var offset = d2.getTime() - d1.getTime();
-                var totalDays = Math.round(offset / 1000 / 60 / 60 / 24);
-                if($('#loaitin').val() != 0)
-                {
-                  tongtien = gia*totalDays;
-                }
-                $.ajax({
-                  type:'get',
-                  url:'{{ url("kiemtratien") }}',
-                  data:{tongtien:tongtien},
-                  async: true,
-                  success:function(html){
-                    kt = html;
-                    if(kt == 1)
-                    {
-                      alert('Bạn không đủ tiền để thực hiện việc đăng bài. Vui lòng nạp thêm tiền.')
-                    }
-                  }
-                });
-                loaitin =  $('#loaitin').val().substring(0,1);
-                 data.append('tieude', $('#tieude').val());
-                 data.append('loaichothue', $('#loaichothue').val());
-                 data.append('tp', $('#tp').val());
-                 data.append('tieude', $('#tieude').val());
-                 data.append('loaichothue', $('#loaichothue').val());
-                 data.append('quan', $('#quan').val());
-                 data.append('phuong', $('#phuong').val());
-                 data.append('dientich', $('#dientich').val());
-                 data.append('gia', $('#gia').val());
-                 data.append('mota', $('#mota').val());
-                 data.append('tenlienhe', $('#tenlienhe').val());
-                 data.append('diachill', $('#diachill').val());
-                 data.append('dienthoai', $('#dienthoai').val());
-                 data.append('ngaybatdau', $('#ngaybatdau').val());
-                 data.append('ngayketthuc', $('#ngayketthuc').val());
-                 data.append('tongtien', tongtien);
-                 data.append('loaitin', loaitin);
-                 data.append('email', $('#email').val());
-                 data.append('nguoidang', $('#nguoidang').val());
-                 date.append('tongngay',totalDays);
-                 var string = $('#txtaddress').val();
-                 diachi = string.substring(0,string.indexOf(","));
-                 data.append('diachi', diachi);
-                 diachichinhxac = $('#txtlat').val() + ';' + $('#txtlng').val();
-                 data.append('map',diachichinhxac);
-             //  $.ajax({
-             //    type:'post',
-             //    url:'{{url("postdangtin")}}',
-             //    data:{
-             //    tieude:$('#tieude').val(),
-             //    loaichothue:$('#loaichothue').val(),
-             //    tp:$('#tp').val(),
-             //    quan:$('#quan').val(),
-             //    phuong:$('#phuong').val(),
-             //    dientich:$('#dientich').val(),
-             //    gia:$('#gia').val(),
-             //    mota: $('#mota').val(),
-             //    tenlienhe: $('#tenlienhe').val(),
-             //    diachi: $('#diachi').val(),
-             //    dienthoai: $('#dt').val(),
-             //    email: $('#email').val(),
-             //    ngaybatdau: $('#ngaybatdau').val(),
-             //    ngayketthuc: $('#loaichothue').val(),
-             //    tongtien: tongtien,
-             //    loaitin: $('#loaitin').val()
-             //    },
-             //    async: true,
-             //    success:function(html){
-             //     alert(html);
-             //   }
-             // });
-             if(kt == 0)
-             {
+              var tongtien,kt;
+              var gia = $('#loaitin').val().substring(2);
+              var d2 = new Date($('#ngayketthuc').val());
+              var d1 = new Date($('#ngaybatdau').val());
+              var offset = d2.getTime() - d1.getTime();
+              var totalDays = Math.round(offset / 1000 / 60 / 60 / 24);
+              if($('#loaitin').val() != 0)
+              {
+                tongtien = gia*totalDays;
+              }
+              loaitin =  $('#loaitin').val().substring(0,1);
+              data.append('tieude', $('#tieude').val());
+              data.append('loaichothue', $('#loaichothue').val());
+              data.append('tp', $('#tp').val());
+              data.append('tieude', $('#tieude').val());
+              data.append('loaichothue', $('#loaichothue').val());
+              data.append('quan', $('#quan').val());
+              data.append('phuong', $('#phuong').val());
+              data.append('dientich', $('#dientich').val());
+              data.append('gia', $('#gia').val());
+              data.append('mota', $('#mota').val());
+              data.append('tenlienhe', $('#tenlienhe').val());
+              data.append('diachill', $('#diachill').val());
+              data.append('dienthoai', $('#dienthoai').val());
+              data.append('ngaybatdau', $('#ngaybatdau').val());
+              data.append('ngayketthuc', $('#ngayketthuc').val());
+              data.append('tongtien', tongtien);
+              data.append('loaitin', loaitin);
+              data.append('email', $('#email').val());
+              data.append('nguoidang', $('#nguoidang').val());
+              data.append('tongngay',totalDays);
+              var string = $('#txtaddress').val();
+              diachi = string.substring(0,string.indexOf(","));
+              data.append('diachi', diachi);
+              diachichinhxac = $('#txtlat').val() + ';' + $('#txtlng').val();
+              data.append('map',diachichinhxac);
               $.ajax({
-                type:'post',
-                url:'{{url("postdangtin")}}',
-                data: data,
-                processData: false, contentType: false,
+                type:'get',
+                url:'{{ url("kiemtratien") }}',
+                data:{tongtien:tongtien},
                 async: true,
                 success:function(html){
-                 alert(JSON.stringify(html));
-               }
-             });
-             }
+                  kt = html;
+                  if(kt == 1)
+                  {
+                    alert('Bạn không đủ tiền để thực hiện việc đăng bài. Vui lòng nạp thêm tiền.')
+                  }
+                  else
+                  {
+                    $.ajax({
+                      type:'post',
+                      url:'{{url("postdangtin")}}',
+                      data: data,
+                      processData: false, contentType: false,
+                      async: true,
+                      success:function(html){
+                       alert(JSON.stringify(html));
+                     }
+                   });
+                  }
+                }
+              });
             }
           }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -803,12 +763,6 @@
               $('#ktdiachi').html('*Vui lòng nhập địa chỉ liên lạc');
               check++;
             }
-            if($('#diachill').val() == '')
-            {
-              document.getElementById("diachill").style.marginBottom = "0";
-              $('#ktdiachill').html('*Vui lòng nhập địa chỉ liên lạc');
-              check++;
-            }
             if($('#dienthoai').val() == '')
             {
               document.getElementById("dienthoai").style.marginBottom = "0";
@@ -829,20 +783,14 @@
                 $('#ktdtdd').html('');
               }
             }
-            if($('#email').val() == '')
-            {
-              document.getElementById("email").style.marginBottom = "0";
-              $('#ktemail').html('*Vui lòng nhập email');
-              check++;
-            }
-            else
+            if($('#email').val() != '')
             {
               var email = document.getElementById('email'); 
               var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; 
               if (!filter.test(email.value)) { 
                 document.getElementById("email").style.marginBottom = "0";
-               $('#ktemail').html('*Hãy nhập địa chỉ email hợp lệ.Example@gmail.com');
-               check++;
+                $('#ktemail').html('*Hãy nhập địa chỉ email hợp lệ.Example@gmail.com');
+                check++;
               }
               else
               {
@@ -881,7 +829,6 @@
             }
             if(check == 0)
             {
-
                 var tongtien;
                 var gia = $('#loaitin').val().substring(2);
                 var d2 = new Date($('#ngayketthuc').val());
@@ -892,8 +839,9 @@
                 if($('#loaitin').val() != 0)
                 {
                   tongtien = gia*totalDays;
-                  tongtiencu = $('#tongtiencu').val();
+                  tongtiencu = $('#tongtien').val();
                   tienthem  = tongtien-tongtiencu;
+                  alert(tienthem);
                 }
                 loaitin =  $('#loaitin').val().substring(0,1);
                 data.append('tieude', $('#tieude').val());
@@ -918,8 +866,16 @@
                 data.append('idtin', $('#idtin').val());
                 data.append('giatin', gia);
                 var string = $('#txtaddress').val();
-                 diachi = string.substring(0,string.indexOf(","));
-                 data.append('diachi', diachi);
+                
+                 if(string == '')
+                 {
+                    data.append('diachi', $('#diachi').val());
+                 }
+                 else
+                 {
+                    diachi = string.substring(0,string.indexOf(","));
+                    data.append('diachi', diachi);
+                 }
                  diachichinhxac = $('#txtlat').val() + ';' + $('#txtlng').val();
                  data.append('map',diachichinhxac);
                 if(changeday2 == true)
@@ -982,44 +938,23 @@
                   alert('Bạn chưa thực hiện gia hạn.');
                 }
               }
-                
-
-             //  $.ajax({
-             //    type:'post',
-             //    url:'{{url("postdangtin")}}',
-             //    data:{
-             //    tieude:$('#tieude').val(),
-             //    loaichothue:$('#loaichothue').val(),
-             //    tp:$('#tp').val(),
-             //    quan:$('#quan').val(),
-             //    phuong:$('#phuong').val(),
-             //    dientich:$('#dientich').val(),
-             //    gia:$('#gia').val(),
-             //    mota: $('#mota').val(),
-             //    tenlienhe: $('#tenlienhe').val(),
-             //    diachi: $('#diachi').val(),
-             //    dienthoai: $('#dt').val(),
-             //    email: $('#email').val(),
-             //    ngaybatdau: $('#ngaybatdau').val(),
-             //    ngayketthuc: $('#loaichothue').val(),
-             //    tongtien: tongtien,
-             //    loaitin: $('#loaitin').val()
-             //    },
-             //    async: true,
-             //    success:function(html){
-             //     alert(html);
-             //   }
-             // });
 
             }
           }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();   
+        $(document).ready(function(){ 
+          var trangthai = $('#trangthai').val();
           var totalDays,gia,checkdate = false,ngaytam;
           var today = new Date();
           ngaytam = $('#ngayketthuc').val();
-          ngaytam_date =  new Date($('#ngayketthuc').val())
+          ngaytam_date =  new Date($('#ngayketthuc').val());
+          
+          var tam = $('#ngaybatdau').val();
+          var tam_date =  new Date($('#ngaybatdau').val())
+          if( trangthai == 2 && (tam_date>today))
+          {
+            $('#ngaybatdau').attr('disabled', 'disabled');
+         }
           $('#tp').on('change',function(){
             if(tp){
               $.ajax({
@@ -1087,9 +1022,12 @@
               }
               else
               {
+                if(tam < today)
+                {
                 alert('Vui lòng chọn ngày bắt đầu từ hôm nay');
                 document.getElementById("ngaybatdau").valueAsDate = new Date();
                 $('#ngayketthuc').val('');
+                }
               }
             }
             if ($('#ngaybatdau').val() >= $('#ngayketthuc').val() && $('#ngayketthuc').val() != '' && checkdate == true)
@@ -1156,23 +1094,35 @@
 
             return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
           }
+          var loaitin = $('#loaitin').val()
+          var loaitindau =  $('#loaitin').val().substring(0,1);
           $('#loaitin').on('change',function(){
               gia = $(this).val().substring(2);
-              gia_tam = format_number(gia,0,'.','.');
-              $('#dongia').html('Đơn giá: '+gia_tam+' VND');
-              if($('#ngayketthuc').val() != '' && $('#ngaybatdau').val() != '')
+              var loaitinsau = $(this).val().substring(0,1)
+              if(loaitin < loaitinsau)
               {
-                var d2 = new Date($('#ngayketthuc').val());
-                var d1 = new Date($('#ngaybatdau').val());
-                var offset = d2.getTime() - d1.getTime();
-                total = Math.round(offset / 1000 / 60 / 60 / 24);
-                $('#songaydang').html("Số ngày đăng: " + total + " ngày");
-                var tongtien = gia*total;
-                tongtienin = format_number(tongtien,0,'.','.');
-                $('#tongtien').html('Tổng tiền: ' +tongtienin+' VND');
-                if(changeday2 == false)
-                  tienthaydoi = true;
+                alert('Bạn không thể hạ loại tin thấp hơn');
+                $(this).val(loaitindau);
+              }
+              else
+              {
+                gia_tam = format_number(gia,0,'.','.');
+                $('#dongia').html('Đơn giá: '+gia_tam+' VND');
+                if($('#ngayketthuc').val() != '' && $('#ngaybatdau').val() != '')
+                {
+                  var d2 = new Date($('#ngayketthuc').val());
+                  var d1 = new Date($('#ngaybatdau').val());
+                  var offset = d2.getTime() - d1.getTime();
+                  total = Math.round(offset / 1000 / 60 / 60 / 24);
+                  $('#songaydang').html("Số ngày đăng: " + total + " ngày");
+                  var tongtien = gia*total;
+                  tongtienin = format_number(tongtien,0,'.','.');
+                  $('#tongtien').html('Tổng tiền: ' +tongtienin+' VND');
+                  if(changeday2 == false && loaitindau != loaitinsau)
+                    tienthaydoi = true;
                 }
+              }
+              
           });
           
         });

@@ -70,7 +70,7 @@ foreach (explode(' ', $str) as $word)
 							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung1';$a++;} else { echo 'col-lg-12 col-sm-12 khung-1'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
 								<div class="properties" style="text-align: left;">
 									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
-									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" style="margin-bottom: 20px" class="img-responsive" alt="properties"/>
 								</div>
 								<div class="col-lg-8">
 									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip1">{{$p->TieuDe}}</a></p>
@@ -119,7 +119,7 @@ foreach (explode(' ', $str) as $word)
 							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung2';$a++;} else { echo 'col-lg-12 col-sm-12 khung-2'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
 								<div class="properties" style="text-align: left;">
 									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
-									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" style="margin-bottom: 20px" class="img-responsive" alt="properties"/>
 								</div>
 								<div class="col-lg-8">
 									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip2">{{$p->TieuDe}}</a></p>
@@ -169,7 +169,7 @@ foreach (explode(' ', $str) as $word)
 							<div class="<?php if($a==0){echo 'col-lg-12 col-sm-12 khung3';$a++;} else { echo 'col-lg-12 col-sm-12 khung-3'; } ?>" style="padding-top: 25px;padding-bottom: 0px">
 								<div class="properties" style="text-align: left;">
 									<div class="col-lg-4"><?php $array =  (explode(';', $p->HinhAnh)); $hinh = $array[0]; ?>
-									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" alt="properties"/>
+									<img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" style="margin-bottom: 20px" class="img-responsive" alt="properties"/>
 								</div>
 								<div class="col-lg-8">
 									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip3">{{$p->TieuDe}}</a></p>

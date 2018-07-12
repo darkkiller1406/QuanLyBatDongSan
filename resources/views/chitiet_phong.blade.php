@@ -90,7 +90,7 @@
           $array =  (explode(';', $d->HinhAnh)); $hinh = $array[0]; ?>
           
           <div class="row">
-            <div class="col-lg-4 col-sm-5"><img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive" class="img-responsive img-circle" alt="properties"/></div>
+            <div class="col-lg-4 col-sm-5"><img src="<?php echo asset('img/ThuePhong/'.$hinh) ?>" class="img-responsive rounded" alt="properties"/></div>
             <div class="col-lg-8 col-sm-7">
               <a href="../chitietphong/{{$d->id}}" class="title">{{$d->TieuDe}}</a>
               <p>{{$d->Gia}} Triệu/Tháng</p> </div>
@@ -183,7 +183,8 @@
                     </p>
                     <p><b>Người đăng:</b> {{$chitiet->nguoidang->Ten}}</p>
                     <p><b>Loại tin rao:</b> {{$chitiet->loaichothue->LoaiChoThue}}</p>
-                    <p><b>Ngày đăng:</b> <?php $date =  date_create( $chitiet->NgayBatDau); ?> {{$date->format('d/m/Y H:i:s')}}</p>
+                    <p><b>Ngày đăng:</b> <?php $date1 =  date_create( $chitiet->NgayBatDau); ?> {{$date1->format('d/m/Y H:i:s')}}</p>
+                    <p><b>Ngày hết hạn:</b> <?php $date2 =  date_create( $chitiet->NgayKetThuc); ?> {{$date2->format('d/m/Y H:i:s')}}</p>
                     <p><b>Giá cho thuê:</b> {{$chitiet->Gia}} Triệu/Tháng</p>
                     <p><b>Diện tích:</b> {{$chitiet->DienTich}} m2</p>
                   </li>

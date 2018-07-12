@@ -6,7 +6,7 @@
   body{font-family: DejaVu Sans, sans-serif;}
 .table-gia{
     width: 100%;
-    font-size: 13px;
+    font-size: 12px;
     border-collapse: collapse;
 }
 .table-gia th,td{
