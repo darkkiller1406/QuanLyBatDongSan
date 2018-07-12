@@ -183,7 +183,7 @@
                     </p>
                     <p><b>Người đăng:</b> {{$chitiet->nguoidang->Ten}}</p>
                     <p><b>Loại tin rao:</b> {{$chitiet->loaichothue->LoaiChoThue}}</p>
-                    <p><b>Ngày đăng:</b> {{$chitiet->NgayBatDau }}</p>
+                    <p><b>Ngày đăng:</b> <?php $date =  date_create( $chitiet->NgayBatDau); ?> {{$date->format('d/m/Y H:i:s')}}</p>
                     <p><b>Giá cho thuê:</b> {{$chitiet->Gia}} Triệu/Tháng</p>
                     <p><b>Diện tích:</b> {{$chitiet->DienTich}} m2</p>
                   </li>
@@ -233,8 +233,8 @@
           resultsMap.setCenter(results[0].geometry.location);
           var marker = new google.maps.Marker({
             map: resultsMap,
-            position: results[0].geometry.location
-
+            position: results[0].geometry.location,
+            icon: "../img/gps.png",
           });
         } else {
           alert('Geocode was not successful for the following reason: ' + address);

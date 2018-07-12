@@ -30,7 +30,8 @@
             {{ session('canhbao') }}
           </div>
           @endif
-          <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ Sửa tin /////////-->
           <?php if(isset($kq)) { 
             $Phuong = $kq->Phuong;
             foreach ($quan as $q)
@@ -46,7 +47,9 @@
                 $ThanhPho =  $tp->id;
               }
             }
-                
+             $array =  (explode(';', $kq->Map));
+                   $lat = $array[0];
+                   $lng = $array[1];   
           ?>
           <div class="col-lg-12 col-sm-12 col-xs-12 ">
             <input type="hidden" name="idnguoitao" id="nguoidang" value="{{ Auth::user()->id }}">
@@ -109,10 +112,17 @@
                 <div id="ktphuong" class="sub"></div>
                 </div>
                 <div class="col-lg-12">
-                   <label class="col-lg-2 lease-label margin-lable">Địa chỉ</label>
-                   <input type="text" name="tieude" class="lease-input form-control" value="{{$kq->DiaChi}}" id="diachi" required>
-                   <div class="class="col-lg-2"></div>
+                  <label class="col-lg-2 lease-label margin-lable">Địa chỉ:</label>
+                  <input type="text" id="diachi" class="lease-input form-control" value="{{$kq->DiaChi}}" />
+                  <div class="class="col-lg-2"></div>
                    <div id="ktdiachi" class="sub"></div>
+                  <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
+                  <input type="hidden" id="txtaddress" name="txtaddress" value=""  class="form-control"  />
+                  <input type="hidden" id="txtlat" value="{{$lat}}" name="txtlat"  class="form-control"  />
+                  <input type="hidden" id="txtlng"  value="{{$lng}}" name="txtlng" class="form-control" />
+                </div>
+                <div class="col-md-12">
+                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;"></div>
                 </div>
                 <div class="col-lg-6">
                    <label class="col-lg-4 lease-label">Diện tích</label>
@@ -251,10 +261,17 @@
                 <div id="ktphuong" class="sub"></div>
                 </div>
                 <div class="col-lg-12">
-                   <label class="col-lg-2 lease-label margin-lable">Địa chỉ</label>
-                   <input type="text" name="tieude" class="lease-input form-control" placeholder="Địa chỉ" id="diachi" required>
-                   <div class="class="col-lg-2"></div>
+                  <label class="col-lg-2 lease-label margin-lable">Địa chỉ:</label>
+                  <input type="text" id="diachi" class="lease-input form-control" value="" />
+                  <div class="class="col-lg-2"></div>
                    <div id="ktdiachi" class="sub"></div>
+                  <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
+                  <input type="hidden" id="txtaddress" name="txtaddress" value=""  class="form-control"  />
+                  <input type="hidden" id="txtlat" value="" name="txtlat"  class="form-control"  />
+                  <input type="hidden" id="txtlng"  value="" name="txtlng" class="form-control" />
+                </div>
+                <div class="col-md-12">
+                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;"></div>
                 </div>
                 <div class="col-lg-6">
                    <label class="col-lg-4 lease-label">Diện tích</label>
@@ -349,7 +366,187 @@
 </div>
 @endsection
 @section('script')
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzlVX517mZWArHv4Dt3_JVG0aPmbSE5mE&callback=initialize&libraries=geometry,places" async defer></script>
 <script type="text/javascript">
+  // test map
+    var map;
+  var marker;
+  function initialize() {
+      mapOptions = {
+      center: {lat: 10.769444, lng: 106.681944},
+      zoom: 17
+      };
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+  // Get GEOLOCATION
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+        position.coords.longitude);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+        'latLng': pos
+      }, function (results, status) {
+        if (status ==
+          google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            console.log(results[0].formatted_address);
+          } else {
+            console.log('No results found');
+          }
+        } else {
+          console.log('Geocoder failed due to: ' + status);
+        }
+      });
+      map.setCenter(pos);
+      marker = new google.maps.Marker({
+        position: pos,
+        map: map,
+        draggable: true
+      });
+    }, function() {
+      handleNoGeolocation(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+
+  function handleNoGeolocation(errorFlag) {
+    if (errorFlag) {
+      var content = 'Error: The Geolocation service failed.';
+    } else {
+      var content = 'Error: Your browser doesn\'t support geolocation.';
+    }
+    var lat = $('#txtlat').val();
+    var lng = $('#txtlng').val();
+    var options;
+    if(lat != '' && lng != '')
+    {
+      options = {
+      map: map,
+      zoom: 17,
+      position: new google.maps.LatLng(lat,lng),
+      content: content
+      };
+    }
+    else
+    {
+      options = {
+      map: map,
+      zoom: 17,
+      position: new google.maps.LatLng(10.769444,106.681944),
+      content: content
+      };
+    }
+
+    map.setCenter(options.position);
+    marker = new google.maps.Marker({
+      position: options.position,
+      map: map,
+      zoom: 19,
+      icon: "../img/gps.png",
+      draggable: true
+    });
+    /* Dragend Marker */ 
+    google.maps.event.addListener(marker, 'dragend', function() {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            $('#diachi').val(results[0].formatted_address);
+            $('#txtaddress').val(results[0].formatted_address);
+            $('#txtlat').val(marker.getPosition().lat());
+            $('#txtlng').val(marker.getPosition().lng());
+            infowindow.setContent(results[0].formatted_address);
+            infowindow.open(map, marker);
+          }
+        }
+      });
+    });
+    /* End Dragend */
+
+  }
+
+  // get places auto-complete when user type in diachi
+  var input = /** @type {HTMLInputElement} */
+  (
+    document.getElementById('diachi'));
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  var infowindow = new google.maps.InfoWindow();
+  marker = new google.maps.Marker({
+    map: map,
+    icon: "../img/gps.png",
+    anchorPoint: new google.maps.Point(0, -29),
+    draggable: true
+  });
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      return;
+    }
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': place.geometry.location}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          $('#txtaddress').val(results[0].formatted_address);
+          infowindow.setContent(results[0].formatted_address);
+          infowindow.open(map, marker);
+        }
+      }
+    });
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17); // Why 17? Because it looks good.
+    }
+    marker.setIcon( /** @type {google.maps.Icon} */ ({
+      url: "../img/gps.png"
+    }));
+    document.getElementById('txtlat').value = place.geometry.location.lat();
+    document.getElementById('txtlng').value = place.geometry.location.lng();
+    console.log(place.geometry.location.lat());
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+      (place.address_components[0] && place.address_components[0].short_name || ''), (place.address_components[1] && place.address_components[1].short_name || ''), (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+    /* Dragend Marker */ 
+    google.maps.event.addListener(marker, 'dragend', function() {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            $('#diachi').val(results[0].formatted_address);
+            $('#txtlat').val(marker.getPosition().lat());
+            $('#txtlng').val(marker.getPosition().lng());
+            infowindow.setContent(results[0].formatted_address);
+            infowindow.open(map, marker);
+
+          }
+        }
+      });
+    });
+    /* End Dragend */
+  });
+
+}
+
+
+// google.maps.event.addDomListener(window, 'load', initialize);
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          $.ajaxSetup({
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -510,7 +707,6 @@
                  data.append('gia', $('#gia').val());
                  data.append('mota', $('#mota').val());
                  data.append('tenlienhe', $('#tenlienhe').val());
-                 data.append('diachi', $('#diachi').val());
                  data.append('diachill', $('#diachill').val());
                  data.append('dienthoai', $('#dienthoai').val());
                  data.append('ngaybatdau', $('#ngaybatdau').val());
@@ -520,7 +716,11 @@
                  data.append('email', $('#email').val());
                  data.append('nguoidang', $('#nguoidang').val());
                  date.append('tongngay',totalDays);
-
+                 var string = $('#txtaddress').val();
+                 diachi = string.substring(0,string.indexOf(","));
+                 data.append('diachi', diachi);
+                 diachichinhxac = $('#txtlat').val() + ';' + $('#txtlng').val();
+                 data.append('map',diachichinhxac);
              //  $.ajax({
              //    type:'post',
              //    url:'{{url("postdangtin")}}',
@@ -707,7 +907,6 @@
                 data.append('gia', $('#gia').val());
                 data.append('mota', $('#mota').val());
                 data.append('tenlienhe', $('#tenlienhe').val());
-                data.append('diachi', $('#diachi').val());
                 data.append('diachill', $('#diachill').val());
                 data.append('dienthoai', $('#dienthoai').val());
                 data.append('ngaybatdau', $('#ngaybatdau').val());
@@ -718,6 +917,11 @@
                 data.append('nguoidang', $('#nguoidang').val());
                 data.append('idtin', $('#idtin').val());
                 data.append('giatin', gia);
+                var string = $('#txtaddress').val();
+                 diachi = string.substring(0,string.indexOf(","));
+                 data.append('diachi', diachi);
+                 diachichinhxac = $('#txtlat').val() + ';' + $('#txtlng').val();
+                 data.append('map',diachichinhxac);
                 if(changeday2 == true)
                 {
                   $.ajax({
@@ -751,23 +955,33 @@
                 }
                 else
                 {
-                  if(tienthaydoi == true)
+                  var today = new Date();
+                  var ngaytam = $('#ngayketthuc').val();
+                  var ngaytam_date =  new Date($('#ngayketthuc').val());
+                  if(today < ngaytam_date)
                   {
+                   if(tienthaydoi == true)
+                   {
                     data.append('tienthaydoi', tienthem );
+                    }
+                    data.append('tam', 0);
+                    $.ajax({
+                    type:'post',
+                    url:'{{url("postsuatin")}}',
+                    data: data,
+                    processData: false, contentType: false,
+                    async: true,
+                    success:function(html){
+                     alert(JSON.stringify(html));
+                     window.location='{{url("tindadang")}}';
+                    }
+                  });
                   }
-                  data.append('tam', 0);
-                        $.ajax({
-                          type:'post',
-                          url:'{{url("postsuatin")}}',
-                          data: data,
-                          processData: false, contentType: false,
-                          async: true,
-                          success:function(html){
-                           alert(JSON.stringify(html));
-                           window.location='{{url("tindadang")}}';
-                         }
-                       });
+                else
+                {
+                  alert('Bạn chưa thực hiện gia hạn.');
                 }
+              }
                 
 
              //  $.ajax({

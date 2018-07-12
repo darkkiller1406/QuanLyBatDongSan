@@ -83,6 +83,7 @@ class QL_ChoThueController extends Controller
         $p->DienTich = $r->dientich;
         $p->Gia = $r->gia;
         $p->MoTa = $r->mota;
+        $p->Map = $r->map;
         $p->TongTien = $r->tongtien;
         $p->TienCu = '0';
         $p->Loaitin = $r->loaitin;
@@ -182,6 +183,7 @@ class QL_ChoThueController extends Controller
         $p->DienTich = $r->dientich;
         $p->Gia = $r->gia;
         $p->MoTa = $r->mota;
+        $p->Map = $r->map;
         $p->Loaitin = $r->loaitin;  
         $p->NguoiDang = $r->nguoidang;
         $p->DiaChi = $r->diachi;
