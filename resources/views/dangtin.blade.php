@@ -117,13 +117,13 @@
                   <input type="text" id="diachi" class="lease-input form-control" value="{{$kq->DiaChi}}" />
                   <div class="class="col-lg-2"></div>
                    <div id="ktdiachi" class="sub"></div>
-                  <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
                   <input type="hidden" id="txtaddress" name="txtaddress" value=""  class="form-control"  />
                   <input type="hidden" id="txtlat" value="{{$lat}}" name="txtlat"  class="form-control"  />
                   <input type="hidden" id="txtlng"  value="{{$lng}}" name="txtlng" class="form-control" />
                 </div>
-                <div class="col-md-12">
-                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;"></div>
+                <div class="col-md-11" style="margin-left: 40px">
+                   <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
+                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;padding-left: 30px;border: 1px solid black;"></div>
                 </div>
                 <div class="col-lg-6">
                    <label class="col-lg-4 lease-label">Diện tích</label>
@@ -266,13 +266,13 @@
                   <input type="text" id="diachi" class="lease-input form-control" value="" />
                   <div class="class="col-lg-2"></div>
                    <div id="ktdiachi" class="sub"></div>
-                  <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
                   <input type="hidden" id="txtaddress" name="txtaddress" value=""  class="form-control"  />
                   <input type="hidden" id="txtlat" value="" name="txtlat"  class="form-control"  />
                   <input type="hidden" id="txtlng"  value="" name="txtlng" class="form-control" />
                 </div>
-                <div class="col-md-12">
-                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;"></div>
+                <div class="col-md-11" style="margin-left: 40px">
+                   <p><i class="far fa-bell"></i> Nếu địa chỉ hiển thị bên bản đồ không đúng bạn có thể điều chỉnh bằng cách kéo điểm màu xanh trên bản đồ tới vị trí chính xác.</p>
+                  <div id="map-canvas" style="width: auto; height: 400px;margin-bottom: 20px;padding-left: 30px;border: 1px solid black;"></div>
                 </div>
                 <div class="col-lg-6">
                    <label class="col-lg-4 lease-label">Diện tích</label>
