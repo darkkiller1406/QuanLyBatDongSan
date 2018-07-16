@@ -348,12 +348,13 @@ a, a:hover{
     color: #000;
     background-color: #ffffff;
     font-size: 15px;
-    width: auto;
+    width: 200px;
     padding: 10px 15px;
    list-style: none;
    padding-top: 20px;
    margin-left: 15px;
    padding-bottom: 20px;
+   box-shadow: 2px 2px 2px grey;
 }
 .nav>li:hover .sub-menu {
   display: block;

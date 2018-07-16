@@ -87,7 +87,7 @@ class QL_DangNhapConTroller extends Controller
          $this->validate($request,[
             'name'=> 'required|min:3|unique:users,name',
             'email'=>'required|email|unique:users,email',
-            'password'=> 'required|digits_between:6,20',
+            'password'=> 'required|between:6,20',
             'passwordAgain'=>'required|same:password'
         ],[
             'name.required'=> 'Bạn chưa nhập tên người dùng',
@@ -97,7 +97,7 @@ class QL_DangNhapConTroller extends Controller
             'email.unique'=>'Email đã tồn tại',
             'name.unique'=>'Tên đăng nhập đã tồn tại',
             'password.required'=> 'Bạn chưa nhập mật khẩu',
-            'password.digits_between' => 'Mật khẩu phải có ít nhất 6 kí tự',
+            'password.between' => 'Mật khẩu phải có ít nhất 6 kí tự',
             'passwordAgain.required' => 'Bạn chưa nhập lại mật khẩu',
             'passwordAgain.same' => 'Mật khẩu nhập lại không khớp'
         ]);

@@ -140,7 +140,7 @@ class QL_ChoThueController extends Controller
             $lichsu->save();
             //
             $t = $p->TongTien;
-            $p->TongTien = ($r->tongtien)+($p->TienThayDoi);
+            $p->TongTien = ($p->TongTien)+($r->tienthaydoi);
             $p->TienCu = $t;
         }
         if( $r->tam == 1)
@@ -153,7 +153,7 @@ class QL_ChoThueController extends Controller
             $lichsu = new LichSuGiaoDich();
             $lichsu->TienGiaoDich =  $r->tongtien;
             $lichsu->LoaiGiaoDich = '1';
-            $lichsu->GiaoDich = 'Thực hiện gia hạn ngày đăng';
+            $lichsu->GiaoDich = 'Thực hiện gia hạn ngày đăng' ;
             $lichsu->NguoiThucHien = Auth::user()->id;
             $lichsu->save();
             //

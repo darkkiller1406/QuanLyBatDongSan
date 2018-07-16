@@ -65,13 +65,13 @@
 							<?php if(Auth::check()) { ?>
 									<li><a>XIN CHÀO {{Auth::user()->Ten}}</a>
 										<ul class="sub-menu">
-											<li style="margin-top: 10px;">TIỀN: {{number_format(Auth::user()->Tien)}} VNĐ</li>
+											<li style="margin-top: 10px;padding-left: 10px;">TIỀN: {{number_format(Auth::user()->Tien)}} VNĐ</li>
 											<hr>
-											<li><a href="{{route('view_trangcanhan')}}" style="padding-bottom: 20px;padding-left: 20px;">TÀI KHOẢN</a></li>
+											<li><a href="{{route('view_trangcanhan')}}" style="padding-bottom: 20px;padding-left: 35px;">TÀI KHOẢN</a></li>
 											<hr>
-											<li><a href="{{route('view_dangtin')}}" class="{{ (\Request::route()->getName() == 'view_dangtin') ? 'active' : '' }}" style="padding-left: 25px;">ĐĂNG TIN</a>
+											<li><a href="{{route('view_dangtin')}}" class="{{ (\Request::route()->getName() == 'view_dangtin') ? 'active' : '' }}" style="padding-left: 40px;">ĐĂNG TIN</a>
 												<hr>
-											<li><a href="./dangxuat" style="padding-top: 20px;padding-left: 20px">ĐĂNG XUẤT</a></li>
+											<li><a href="./dangxuat" style="padding-top: 20px;padding-left: 35px">ĐĂNG XUẤT</a></li>
 										</li>
 									</ul>
 									</li>
