@@ -388,7 +388,7 @@
 </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnYFDJ7BW8yaet9yNSAA-A0eBBFULQf40&callback=initialize&libraries=geometry,places" async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzlVX517mZWArHv4Dt3_JVG0aPmbSE5mE&callback=initialize&libraries=geometry,places" async defer></script>
 <script type="text/javascript">
   // test map
   var map;

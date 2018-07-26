@@ -90,10 +90,10 @@
 					<div class="item <?php if ($a==0) { echo 'active' ;} ?>">
 						<div class="col-lg-12 col-sm-12" style="padding-bottom: 15px">
 								<div class="properties" style="text-align: left;">
-									<div class="col-lg-2"><?php $array_thue =  (explode(';', $p->HinhAnh)); $hinh_thue = $array_thue[0]; ?>
+									<div class="col-lg-2 col-sm-2"><?php $array_thue =  (explode(';', $p->HinhAnh)); $hinh_thue = $array_thue[0]; ?>
 									<img src="<?php echo asset('img/ThuePhong/'.$hinh_thue) ?>" class="img-responsive" alt="properties"/>
 								</div>
-								<div class="col-lg-10">
+								<div class="col-lg-10 col-sm-10">
 									<p class="price-rent"><a  href="chitietphong/{{$p->id}}" class="vip-2">{{$p->TieuDe}}</a></p>
 									<div class="listing-detail">
 										<div class="row">

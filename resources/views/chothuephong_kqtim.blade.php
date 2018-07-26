@@ -36,71 +36,12 @@
 	<div class="properties-listing spacer">
 
 		<div class="row">
-			<div class="col-lg-3 col-sm-4 ">
-				<div class="search-form"><h4><span class="glyphicon glyphicon-search"></span>Tìm kiếm</h4>
-					<div class="row">
-						<form method="post" action="{{route('timPhong')}}">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<div class="col-lg-6 col-sm-12 ">
-								<select class="form-control" name="loaichothue">
-									@foreach ($loaichothue as $tp)
-									<option value="{{$tp->id}}">{{$tp->LoaiChoThue}}</option>
-									@endforeach 
-								</select>
-							</div>
-							<div class="col-lg-6 col-sm-12 ">
-								<select class="form-control" name="tp" id="tp">
-									<option value="0">Thành phố</option>
-									@foreach ($thanhpho as $tp)
-									<option value="{{$tp->id}}">{{$tp->TenThanhPho}}</option>
-									@endforeach 
-								</select>
-							</div>
-							<div class="col-lg-6 col-sm-12">
-								<select class="form-control" name="quan" id="quan">
-									<option value="0">Quận/Huyện</option>
-								</select>
-							</div>
-							<div class="col-lg-6 col-sm-12">
-								<select class="form-control" name="phuong" id="phuong">
-									<option value="0">Phường</option>
-								</select>
-							</div>
-							<div class="col-lg-6 col-sm-12">
-								<select class="form-control" name="dt">
-									<option value="0">Diện tích</option>
-									<option value="1">Dưới 20m2</option>
-									<option value="2">20 - 30m2</option>
-									<option value="3">30 - 40m2</option>
-									<option value="4">40 - 50m2</option>
-									<option value="5">50 - 60m2</option>
-									<option value="6">60 - 70m2</option>
-									<option value="7">Trên 70m2</option>
-								</select>
-							</div>
-							<div class="col-lg-6 col-sm-12">
-								<select class="form-control" name="gia">
-									<option value="0">Khoảng giá</option>
-									<option value="1">2 - 3 triệu</option>
-									<option value="2">3 - 5 triệu</option>
-									<option value="3">5 - 7 triệu</option>
-									<option value="4">7 - 10 triệu</option>
-									<option value="5">Trên 10 triệu</option>
-								</select>
-							</div>
-							<div class="col-lg-12 col-sm-12">
-								<button class="btn btn-detail" style="margin-top: 0px;font-size: 18px;color:white;">Tìm kiếm</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
 			<?php
 			 $i=0; ?>
 			@foreach ($kq as $d) <?php if($d->TrangThai == 1) {$i++;} ?> @endforeach
 			<div class="col-lg-9 col-sm-8">
 				<div class="sortby clearfix">
-					<div class="pull-right result">Hiển thị: <?php echo $i; ?> </div>
+					<div class="pull-left result">Hiển thị: <?php echo $i; ?> </div>
 				</div>
 				<div class="row"">
 					<!-- properties -->
@@ -206,6 +147,65 @@
 				@endforeach
 			</div>
 		</div>
+		<div class="col-lg-3 col-sm-4 ">
+				<div class="search-form"><h4><span class="glyphicon glyphicon-search"></span>Tìm kiếm</h4>
+					<div class="row">
+						<form method="post" action="{{route('timPhong')}}">
+							<input type="hidden" name="_token" value="{{ csrf_token() }}">
+							<div class="col-lg-6 col-sm-12 ">
+								<select class="form-control" name="loaichothue">
+									@foreach ($loaichothue as $tp)
+									<option value="{{$tp->id}}">{{$tp->LoaiChoThue}}</option>
+									@endforeach 
+								</select>
+							</div>
+							<div class="col-lg-6 col-sm-12 ">
+								<select class="form-control" name="tp" id="tp">
+									<option value="0">Thành phố</option>
+									@foreach ($thanhpho as $tp)
+									<option value="{{$tp->id}}">{{$tp->TenThanhPho}}</option>
+									@endforeach 
+								</select>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<select class="form-control" name="quan" id="quan">
+									<option value="0">Quận/Huyện</option>
+								</select>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<select class="form-control" name="phuong" id="phuong">
+									<option value="0">Phường</option>
+								</select>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<select class="form-control" name="dt">
+									<option value="0">Diện tích</option>
+									<option value="1">Dưới 20m2</option>
+									<option value="2">20 - 30m2</option>
+									<option value="3">30 - 40m2</option>
+									<option value="4">40 - 50m2</option>
+									<option value="5">50 - 60m2</option>
+									<option value="6">60 - 70m2</option>
+									<option value="7">Trên 70m2</option>
+								</select>
+							</div>
+							<div class="col-lg-6 col-sm-12">
+								<select class="form-control" name="gia">
+									<option value="0">Khoảng giá</option>
+									<option value="1">2 - 3 triệu</option>
+									<option value="2">3 - 5 triệu</option>
+									<option value="3">5 - 7 triệu</option>
+									<option value="4">7 - 10 triệu</option>
+									<option value="5">Trên 10 triệu</option>
+								</select>
+							</div>
+							<div class="col-lg-12 col-sm-12">
+								<button class="btn btn-detail" style="margin-top: 0px;font-size: 18px;color:white;">Tìm kiếm</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 	</div>
 </div>
 </div>

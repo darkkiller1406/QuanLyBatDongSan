@@ -1,9 +1,9 @@
-@section('title','Quản lý thông tin cá nhân')
+@section('title','Lịch sử giao dịch')
 @extends('layout.master_ban')
 @section('content')
 <div class="inside-banner">
   <div class="container"> 
-    <h2>Quản lý thông tin tài khoản</h2>
+    <h2>Lịch sử giao dịch</h2>
   </div>
 </div>
 <div class="container">

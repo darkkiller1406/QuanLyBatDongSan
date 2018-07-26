@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 12, 2018 lúc 10:07 AM
+-- Thời gian đã tạo: Th7 19, 2018 lúc 06:13 PM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.1
 
@@ -56,10 +56,10 @@ CREATE TABLE `dat` (
 INSERT INTO `dat` (`id`, `KyHieuLoDat`, `Rong`, `Dai`, `NoHau`, `DienTich`, `DonGia`, `Gia`, `SoHuu`, `TrangThai`, `Huong`, `DiaChi`, `Quan`, `HinhAnh`, `GhiChu`, `LuotXem`, `created_at`, `updated_at`) VALUES
 (1, 'LK05', 5, 18, 0, 90, 6230250, 560722500, 3, 2, 'Nam', '256 Trần Văn Đang, P11', 3, 'LK05_1.jpg;LK05_2.jpg;LK05_3.jpg;', 'Nhà, công trình xây dựng trên đất phải phù hợp quy hoạch cảnh quan đô thị được cơ quan nhà nước có thẩm quyền phê duyệt.', 61, '2018-05-24 07:42:00', '2018-07-02 06:48:24'),
 (2, 'LK06', 5, 8, 0, 40, 6230250, 249210000, 3, 1, 'Nam', '256 Trần Văn Đang, P.11', 3, 'LK06_1.jpg;LK06_2.jpg;', 'Nhà, công trình xây dựng trên đất phải phù hợp quy hoạch cảnh quan đô thị được cơ quan nhà nước có thẩm quyền phê duyệt.', 15, '2018-05-27 09:21:48', '2018-07-02 06:48:48'),
-(3, 'LK07', 5, 18, 0, 90, 20000000, 1800000000, 1, 2, 'Bắc', '169/24/92B Tô Hiến Thành, P13', 10, 'LK05_1.jpg;LK05_2.jpg;LK05_3.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 22, '0000-00-00 00:00:00', '2018-06-28 09:49:38'),
+(3, 'LK07', 5, 18, 0, 90, 20000000, 1800000000, 1, 2, 'Bắc', '169/24/92B Tô Hiến Thành, P13', 10, 'LK05_1.jpg;LK05_2.jpg;LK05_3.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 23, '0000-00-00 00:00:00', '2018-07-17 03:22:48'),
 (4, 'LK08', 4, 20, 0, 80, 15000000, 1200000000, 1, 2, 'Đông', '169/24/92B Tô Hiến Thành, P13', 10, 'LK06_1.jpg;LK06_2.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 14, '0000-00-00 00:00:00', '2018-06-18 06:58:03'),
 (5, 'LK09', 5, 18, 0, 90, 22000000, 1980000000, 1, 0, 'Bắc', '169/24/92B Tô Hiến Thành, P13', 10, 'LK05_1.jpg;LK05_2.jpg;LK05_3.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 15, '0000-00-00 00:00:00', '2018-06-05 11:00:03'),
-(6, 'LK10', 4, 20, 0, 80, 15000000, 1200000000, 1, 0, 'Đông', '169/24/92B Tô Hiến Thành, P13', 10, 'LK06_1.jpg;LK06_2.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 45, '0000-00-00 00:00:00', '2018-06-30 09:15:49');
+(6, 'LK10', 4, 20, 0, 80, 15000000, 1200000000, 1, 0, 'Đông', '169/24/92B Tô Hiến Thành, P13', 10, 'LK06_1.jpg;LK06_2.jpg;', 'Lô đất năm sau Trung tâm thương mại, khu dân cư quanh đông đúc, gần trường đại học, mặt tiền đường rộng 8m, cơ sở hạ tầng hoàn thiện. Rất thuận tiện việc mua bán , kinh doanh. \r\nDiện tích: 60m2( 5x12) \r\nThương lượng chính chủ, không tiếp cò', 47, '0000-00-00 00:00:00', '2018-07-17 03:25:13');
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,21 @@ INSERT INTO `lichsugiaodich` (`id`, `TienGiaoDich`, `GiaoDich`, `LoaiGiaoDich`, 
 (6, 20000, 'Nạp thêm tiền', 2, '2018-07-12 12:06:56', '2018-07-12 05:06:56', 2),
 (7, 50000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:05', '2018-07-12 05:07:05', 2),
 (8, 100000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:14', '2018-07-12 05:07:14', 2),
-(9, 500000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:23', '2018-07-12 05:07:23', 2);
+(9, 500000, 'Nạp thêm tiền', 2, '2018-07-12 12:07:23', '2018-07-12 05:07:23', 2),
+(10, 250000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:14:38', '2018-07-12 09:14:38', 2),
+(11, 250000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:17:41', '2018-07-12 09:17:41', 2),
+(12, 50000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:20:47', '2018-07-12 09:20:47', 2),
+(13, 50000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-12 16:24:39', '2018-07-12 09:24:39', 2),
+(14, 50000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-12 16:28:59', '2018-07-12 09:28:59', 2),
+(15, 30000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:41:15', '2018-07-12 09:41:15', 2),
+(16, 30000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:41:44', '2018-07-12 09:41:44', 2),
+(17, 30000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:42:45', '2018-07-12 09:42:45', 2),
+(18, 30000, 'Thực hiện đăng tin mới', 1, '2018-07-12 16:43:03', '2018-07-12 09:43:03', 2),
+(37, 120000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-13 11:27:55', '2018-07-13 04:27:55', 2),
+(38, 80000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-13 13:27:50', '2018-07-13 06:27:50', 2),
+(39, 160000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-16 20:15:24', '2018-07-16 13:15:24', 2),
+(40, 200000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-16 20:16:04', '2018-07-16 13:16:04', 2),
+(41, 200000, 'Thực hiện gia hạn ngày đăng', 1, '2018-07-16 20:19:12', '2018-07-16 13:19:12', 2);
 
 -- --------------------------------------------------------
 
@@ -221,9 +235,9 @@ CREATE TABLE `phongthue` (
   `NgayBatDau` datetime NOT NULL,
   `NgayKetThuc` datetime NOT NULL,
   `TenLienHe` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `DiaChiLienLac` varchar(500) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `DiaChiLienLac` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `DienThoaiLienLac` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `Email` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL
+  `Email` varchar(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
@@ -232,7 +246,8 @@ CREATE TABLE `phongthue` (
 
 INSERT INTO `phongthue` (`id`, `TieuDe`, `Phuong`, `DiaChi`, `Map`, `DienTich`, `Gia`, `MoTa`, `HinhAnh`, `LoaiTin`, `LoaiChoThue`, `NguoiDang`, `created_at`, `updated_at`, `TrangThai`, `TienCu`, `TongTien`, `NgayBatDau`, `NgayKetThuc`, `TenLienHe`, `DiaChiLienLac`, `DienThoaiLienLac`, `Email`) VALUES
 (1, 'Cho người nước ngoài thuê phòng đầy đủ trang bị và tiện ích, trung tâm quận 1', 11, '19 Nguyễn Thị Nghĩa', '10.77048963737413;106.69396025396736', 20, 5, 'Room for rent , full equipments and comforts . In the centre of distric 1 . Place is security and quiet , to much foreigner rent the room .\r\nThe area 18 , 25 m2 . Payment more electric fee only ( 3000 VNĐ/ Kw) . Wifi , water free . Add more two drinking water cans free . During of rental at least 3 months .', 'IMG_1_1.jpg;IMG_1_2.jpg;IMG_1_3.jpg;IMG_1_4.jpg;', 1, 1, 2, '2018-06-28 06:16:00', '2018-07-12 07:39:39', 1, 0, 250000, '2018-07-09 00:00:00', '2018-07-20 00:00:00', 'Minh', '163 Tô Hiến Thành,Phường 13, Quận 10, Hồ Chí Minh', '018698858112', 'darkkiller1406@yahoo.com'),
-(3, 'Cho thuê phòng trọ mới, giờ giấc tự do.134 Đinh Tiên Hoàng, Q.1. Liên hệ a.Tâm 0934898020', 1, '134 Đường Đinh Tiên Hoàng', '10.791498;106.696803', 18, 3, 'Nhà còn 10 phòng cho thuê\r\n* Diện tích 18m2 - 24m2.\r\n* Giá: 3,2tr - 4,2tr/tháng.\r\n* Phòng có máy lạnh,máy nước nóng, ban công, cửa sổ, bếp, wifi, cáp.\r\n* Không chung chủ, giờ giấc tự do thoải mái.\r\n* Chổ đậu xe free và an toàn, lối đi riêng, chỗ phơi đồ.\r\n* Thuận tiện đi lại quận 1,2,3,4 Tân Bình,Gò Vấp,Bình Thạnh...\r\n* Thích hợp cho nhân viên văn phòng, dân trí thức, sinh viên it người ở.\r\n- Điện: 3,5 nghìn/kw.\r\n- Nước: 90 nghìn/người.', 'IMG_2_4.jpeg;IMG_2_3.jpeg;IMG_2_2.jpeg;IMG_2_1.jpeg;', 3, 1, 2, '2018-07-01 09:01:10', '2018-07-12 08:06:06', 2, 220000, 250000, '2018-07-01 00:00:00', '2018-07-10 00:00:00', 'A.Tâm', '134 Đinh Tiên Hoàng-Phường Đa Kao, Q.1', '0934898020', 'minh.1406@gmail.com');
+(3, 'Cho thuê phòng trọ mới, giờ giấc tự do.134 Đinh Tiên Hoàng, Q.1. Liên hệ a.Tâm 0934898020', 1, '134 Đường Đinh Tiên Hoàng', '10.791498;106.696803', 18, 3, 'Nhà còn 10 phòng cho thuê\r\n* Diện tích 18m2 - 24m2.\r\n* Giá: 3,2tr - 4,2tr/tháng.\r\n* Phòng có máy lạnh,máy nước nóng, ban công, cửa sổ, bếp, wifi, cáp.\r\n* Không chung chủ, giờ giấc tự do thoải mái.\r\n* Chổ đậu xe free và an toàn, lối đi riêng, chỗ phơi đồ.\r\n* Thuận tiện đi lại quận 1,2,3,4 Tân Bình,Gò Vấp,Bình Thạnh...\r\n* Thích hợp cho nhân viên văn phòng, dân trí thức, sinh viên it người ở.\r\n- Điện: 3,5 nghìn/kw.\r\n- Nước: 90 nghìn/người.', 'IMG_2_4.jpeg;IMG_2_3.jpeg;IMG_2_2.jpeg;IMG_2_1.jpeg;', 2, 1, 2, '2018-07-01 09:01:10', '2018-07-13 04:39:11', 1, 0, 160000, '2018-07-13 00:00:00', '2018-07-17 16:27:55', 'A.Tâm', '134 Đinh Tiên Hoàng-Phường Đa Kao, Q.1', '0934898020', 'minh.1406@gmail.com'),
+(4, 'Căn hộ mini 30m2 full nội thất, Trần Hưng Đạo, Q.1', 12, '39 Nguyễn Cư Trinh', '10.7643701;106.69143059999999', 30, 7.5, NULL, 'IMG_4_2.jpg;IMG_4_1.jpg;', 2, 3, 2, '2018-07-12 09:20:47', '2018-07-17 04:17:59', 2, 0, 160000, '2018-07-11 00:00:00', '2018-07-15 00:00:00', 'A Minh', NULL, '0902864256', NULL);
 
 -- --------------------------------------------------------
 
@@ -261,7 +276,8 @@ INSERT INTO `phuong` (`id`, `TenPhuong`, `ThuocQuan`) VALUES
 (8, 'Phường 4', 2),
 (9, 'Phường 5', 2),
 (10, 'Phường 6', 2),
-(11, 'Phường Đa Kao', 1);
+(11, 'Phường Đa Kao', 1),
+(12, 'Phường Nguyễn Cư Trinh', 1);
 
 -- --------------------------------------------------------
 
@@ -333,8 +349,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `Quyen`, `Ten`, `Tien`) VALUES
-(1, 'admin', 'minh.1406.nt@gmail.com', '$2y$10$licDAaU1z3WI.akCBnytmeo59Uw4wj6puHqdW9UFM7tp5bAIPQzm6', 'OHcW2zvULUKh21SZRxBPSiZyfioj341zTcQlFQ73GxbfeFfmwk518WQ7eVn3', '2018-05-21 09:03:26', '2018-07-12 05:02:57', 1, 'Admin', 0),
-(2, 'congminh', 'darkkiller1406@yahoo.com', '$2y$10$IuHVECWVhbUpFbMGYMm/UOoLKEVWphneTMvmB6sDGhJj/Q41XIoPS', 'Rh5Oie5hJ4qzjYsln82kVIkM0PXCT0xHiioiNfOmFTsd2e5DamfAayWdVdyF', '2018-05-21 09:20:52', '2018-07-12 05:07:23', 2, 'Công Minh', 670000);
+(1, 'admin', 'minh.1406.nt@gmail.com', '$2y$10$licDAaU1z3WI.akCBnytmeo59Uw4wj6puHqdW9UFM7tp5bAIPQzm6', '7OMliSPYS62DvTWNKqYg5qEbvNDvJ7n9mHiOXPxiHQb6LgBFbJkMA100eqXY', '2018-05-21 09:03:26', '2018-07-16 10:23:44', 1, 'Admin', 0),
+(2, 'congminh', 'darkkiller1406@yahoo.com', '$2y$10$IuHVECWVhbUpFbMGYMm/UOoLKEVWphneTMvmB6sDGhJj/Q41XIoPS', 'Rh5Oie5hJ4qzjYsln82kVIkM0PXCT0xHiioiNfOmFTsd2e5DamfAayWdVdyF', '2018-05-21 09:20:52', '2018-07-16 13:19:12', 2, 'Công Minh', 2090000),
+(3, 'congminh1406', 'darkkiller146@yahoo.com', '$2y$10$ZrI0KIkzKvn9acQNH8U7HOhGcsm6ICIfMBMPbHt3HkOILnsxDQ4Sq', NULL, '2018-07-16 09:46:44', '2018-07-16 09:46:44', 2, 'Minh Nguyễn', 100000);
 
 -- --------------------------------------------------------
 
@@ -481,7 +498,7 @@ ALTER TABLE `khachhang`
 -- AUTO_INCREMENT cho bảng `lichsugiaodich`
 --
 ALTER TABLE `lichsugiaodich`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `loaichothue`
@@ -499,13 +516,13 @@ ALTER TABLE `loaitin`
 -- AUTO_INCREMENT cho bảng `phongthue`
 --
 ALTER TABLE `phongthue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `phuong`
 --
 ALTER TABLE `phuong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `quan`
@@ -523,7 +540,7 @@ ALTER TABLE `thanhpho`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `yeucau`

@@ -118,7 +118,7 @@
         </div>
 
         <div class="col-lg-9 col-sm-8 ">
-          <h3 style="padding-bottom: 20px;text-transform: uppercase;font-size: 20px; font-weight: bold; ">{{$chitiet->TieuDe}} </h3>
+          <h3 style="padding-bottom: 20px;text-transform: uppercase;font-size: 20px; font-weight: bold; color: red ">{{$chitiet->TieuDe}} </h3>
           <div class="row">
             <div class="col-lg-8">
               <!-- Slider Starts -->
