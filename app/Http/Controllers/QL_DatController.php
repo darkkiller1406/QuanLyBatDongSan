@@ -28,10 +28,13 @@ class QL_DatController extends Controller
         $i=0;
         $tam = '';
         foreach ($file as $image) {
+            if($i <= 2)
+            {
                 $input['imagename'] = $request->mald.'_'.++$i.'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path('/img');
                 $image->move($destinationPath, $input['imagename']);
                 $tam =$input['imagename'].';'.$tam;
+            }
         }
         //
         $dat->HinhAnh = $tam;
@@ -43,7 +46,7 @@ class QL_DatController extends Controller
         $dat->LuotXem = '0';
         $dat->DiaChi = $request->diachi;
         $dat->Quan = $request->quan;
-        $dat->ThanhPho = $request->tp;
+        //$dat->ThanhPho = $request->tp;
         $dat->Gia = $gia;
         $dat->Dai = $request->dai;
         $dat->Rong = $request->rong;
@@ -69,6 +72,17 @@ class QL_DatController extends Controller
     }
     public function postSua(Request $request)
     {
+         $this->validate($request,[
+            'dai'=>'numeric|min:1',
+            'rong'=>'numeric|min:1',
+            'dongia'=>'numeric|min:1',
+            'nohau'=>'numeric|min:0',
+        ],[
+            'dai.min'=>'Độ dài lô đất phải lớn hơn 0',
+            'rong.min'=>'Độ rộng lô đất phải lớn hơn 0',
+            'dongia.min'=>'Đơn giá lô đất phải lớn hơn 0',
+            'nohau.min'=>'Độ nở hậu lô đất phải lớn hơn hoặc bằng 0',
+        ]);
         $dat = Dat::find($request->iddat);
         $file = $request->file('image');
         $i=0;
@@ -82,10 +96,13 @@ class QL_DatController extends Controller
                 Storage::delete($m[$a]);
             }
             foreach ($file as $image) {
+                if($i <= 2)
+                {
                 $input['imagename'] = $request->mald.'_'.++$i.'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path('/img');
                 $image->move($destinationPath, $input['imagename']);
                 $tam =$input['imagename'].';'.$tam;
+                }
             }
             $dat->HinhAnh = $tam;
         }
@@ -95,7 +112,7 @@ class QL_DatController extends Controller
         $dat->SoHuu = $request->sohuu;
         $dat->DiaChi = $request->diachi;
         $dat->Quan = $request->quan;
-        $dat->ThanhPho = $request->tp;
+        //$dat->ThanhPho = $request->tp;
         $dat->Gia = $gia;
         $dat->Dai = $request->dai;
         $dat->Rong = $request->rong;

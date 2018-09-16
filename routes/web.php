@@ -25,6 +25,8 @@ Route::get('chinhsuatindang/{id}','QL_ChoThueController@getChinhSua');
 
 Route::get('danhsachdat','QL_DatController@getView_DSDat')->name('view_dsDat');
 
+Route::get('danhsachphong_map','QL_ChoThueController@getView_DSPhongMap')->name('view_dsPhong_map');
+
 Route::get('lienlac','TrangChuController@getView_lienlac')->name('view_lienlac');
 
 Route::get('vechungtoi','TrangChuController@getView_vechungtoi')->name('view_vechungtoi');

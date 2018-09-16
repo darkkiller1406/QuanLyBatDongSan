@@ -55,8 +55,14 @@
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="{{route('view_trangchu')}}" class="{{ (\Request::route()->getName() == 'view_trangchu') ? 'active' : '' }}">TRANG CHỦ</a></li>
-							<li><a href="{{route('view_dsDat')}}" class="{{ (\Request::route()->getName() == 'view_dsDat') ? 'active' : '' }}">ĐẤT BÁN</a></li>
-							<li><a href="{{route('view_dsPhong')}}" class="{{ (\Request::route()->getName() == 'view_dsPhong') ? 'active' : '' }}">PHÒNG CHO THUÊ</a></li>
+							<li><a href="{{route('view_dsDat')}}" class="{{ (\Request::route()->getName() == 'view_dsDat') ? 'active' : '' }}">ĐẤT BÁN</a>
+							
+							</li>
+							<li><a href="{{route('view_dsPhong')}}" class="{{ (\Request::route()->getName() == 'view_dsPhong') ? 'active' : '' }}">PHÒNG CHO THUÊ</a>
+							<ul class="sub-menu">
+								<li style="margin-top: 10px;padding-left: 10px;"><a href="{{route('view_dsPhong_map')}}">XEM TRÊN MAP</li></a>
+							</ul>
+							</li>
 							<li><a href="{{route('view_vechungtoi')}}" class="{{ (\Request::route()->getName() == 'view_vechungtoi') ? 'active' : '' }}">VỀ CHÚNG TÔI</a>
 							</li>
 							<li><a href="{{route('view_lienlac')}}" class="{{ (\Request::route()->getName() == 'view_lienlac') ? 'active' : '' }}">LIÊN HỆ</a>

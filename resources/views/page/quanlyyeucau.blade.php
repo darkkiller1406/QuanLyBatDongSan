@@ -200,6 +200,7 @@
             <form class="form-horizontal style-form" method="post" action="{{route('post_ThemHD')}}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="hidden" name="iddat" id="iddat" value="{{$yc->id_dat}}">
+              <input type="hidden" name="sotientam" id="sotientam" value="<?php if(isset($yc->dat->Gia)) { echo $yc->dat->Gia;  } ?>">
               <div class="form-group">
                 <label class="col-sm-3 col-sm-3 control-label">Lô đất</label>
                 <div class="col-sm-9">
@@ -340,6 +341,17 @@
             });
         }
         $(document).ready(function(){
+          $('#sotien').on('change',function(){
+            if($('#sotien').val() <= 0)
+            {
+              $('#sotien').val('1');
+            }
+            var tien = ($('#sotientam').val())*30/100;
+            if($('#sotien').val() > tien)
+            {
+              $('#sotien').val(tien);
+            }
+          });
           $("#search").keyup(function() {
             $.ajax({
               type:'get',

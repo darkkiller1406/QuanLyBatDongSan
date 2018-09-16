@@ -18,6 +18,10 @@ class QL_ChoThueController extends Controller
     {
     	return view('dangtin');
     }
+    public function getView_DSPhongMap()
+    {
+        return view('danhsachphong_map');
+    }
     public function postDangTin(Request $r)
     {
     	$p = new PhongChoThue;

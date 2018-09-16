@@ -260,7 +260,12 @@
             <form id="upload" class="form-horizontal style-form" method="post" action="{{route('post_ThemDAT')}}" enctype="multipart/form-data">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <input type="hidden" name="idnguoitao" value="{{ Auth::user()->id }}">
-              <input type="hidden" class="form-control" name='mald' id="mald" required>
+              <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Ký hiệu lô đất</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name='mald' id="mald" required>
+                </div>
+              </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Địa chỉ</label>
                 <div class="col-sm-10">
@@ -300,35 +305,44 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Đơn giá</label>
                 <div class="col-sm-9">
-                  <input type="number" name="dongia" class="form-control" required>
+                  <input type="number" name="dongia" id="dongiathem" class="form-control" required>
                 </div>
                 <label class="col-sm-1 control-label">VND/m2</label>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Chiều rộng</label>
                 <div class="col-sm-9">
-                  <input type="number" name="rong" class="form-control" required>
+                  <input type="number" name="rong" id="rongthem" class="form-control" required>
                 </div>
                 <label class="col-sm-1 control-label">m</label>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Chiều dài</label>
                 <div class="col-sm-9">
-                  <input type="number" name="dai" class="form-control" required>
+                  <input type="number" name="dai" id="daithem" class="form-control" required>
                 </div>
                 <label class="col-sm-1 control-label">m</label>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Nở hậu</label>
                 <div class="col-sm-9">
-                  <input type="number" name="nohau" class="form-control" required>
+                  <input type="number" name="nohau" id="nohauthem" class="form-control" required>
                 </div>
                 <label class="col-sm-1 control-label">m</label>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Hướng</label>
                 <div class="col-sm-10">
-                  <input type="text" name="huong" class="form-control" required>
+                  <select class="form-control" name="huong">
+                  <option value="Đông">Đông</option>
+                  <option value="Tây">Tây</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Bắc">Bắc</option>
+                  <option value="Đông-Nam">Đông-Nam</option>
+                  <option value="Đông-Bắc">Đông-Bắc</option>
+                  <option value="Tây-Nam">Tây-Nam</option>
+                  <option value="Tây-Bắc">Tây-Bắc</option>
+                </select>
                 </div>
               </div>
               <div class="form-group">
@@ -445,7 +459,16 @@
               <div class="form-group">
                 <label class="col-sm-2 col-sm-2 control-label">Hướng</label>
                 <div class="col-sm-10">
-                  <input type="text" name="huong" id="huong" class="form-control" required>
+                  <select class="form-control" name="huong" id="huong">
+                  <option value="Đông">Đông</option>
+                  <option value="Tây">Tây</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Bắc">Bắc</option>
+                  <option value="Đông-Nam">Đông-Nam</option>
+                  <option value="Đông-Bắc">Đông-Bắc</option>
+                  <option value="Tây-Nam">Tây-Nam</option>
+                  <option value="Tây-Bắc">Tây-Bắc</option>
+                </select>
                 </div>
               </div>
               <div class="form-group">
@@ -620,6 +643,56 @@
           }
         }
         $(document).ready(function(){
+           $('#dongia').on('change',function(){
+            if($('#dongia').val() <= 0)
+            {
+              $('#dongia').val('1');
+            }
+          });
+           $('#rong').on('change',function(){
+            if($('#rong').val() <= 0)
+            {
+              $('#rong').val('1');
+            }
+          });
+           $('#dai').on('change',function(){
+            if($('#dai').val() <= 0)
+            {
+              $('#dai').val('1');
+            }
+          });
+           $('#nohau').on('change',function(){
+            alert($('#nohau').val());
+            if($('#nohau').val() < 0)
+            {
+              $('#nohau').val('0');
+            }
+          });
+          $('#dongiathem').on('change',function(){
+            if($('#dongiathem').val() <= 0)
+            {
+              $('#dongiathem').val('1');
+            }
+          });
+           $('#daithem').on('change',function(){
+            if($('#daithem').val() <= 0)
+            {
+              $('#daithem').val('1');
+            }
+          });
+           $('#nohauthem').on('change',function(){
+            if($('#nohauthem').val() < 0)
+            {
+              $('#nohauthem').val('0');
+            }
+          });
+           $('#rongthem').on('change',function(){
+            if($('#rongthem').val() <= 0)
+            {
+              $('#rongthem').val('1');
+            }
+          });
+
           $("#search").keyup(function() {
             $.ajax({
               type:'get',
@@ -633,6 +706,6 @@
           });
         });
       </script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnYFDJ7BW8yaet9yNSAA-A0eBBFULQf40"
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzlVX517mZWArHv4Dt3_JVG0aPmbSE5mE"
   type="text/javascript"></script>
       @endsection
