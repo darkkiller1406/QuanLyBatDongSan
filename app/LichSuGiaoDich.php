@@ -14,6 +14,6 @@ class LichSuGiaoDich extends Model
     }
     public function getLichSuGiaoDich($id)
     {
-    	return DB::select("SELECT * FROM lichsugiaodich WHERE lichsugiaodich.NguoiThucHien = ".$id);
+    	return DB::select("SELECT * FROM lichsugiaodich WHERE lichsugiaodich.NguoiThucHien = ".$id." ORDER BY id DESC" );
     }
 }

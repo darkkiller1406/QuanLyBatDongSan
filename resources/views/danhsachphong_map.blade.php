@@ -54,14 +54,16 @@
 			zoom: 13,
 			draggable: true
 		});
+	
 		/* Get latlng list phòng trọ */
 		<?php
 		$arrmergeLatln = array();
 		foreach ($phong as $room) {
 			$arrlatlng = explode(';', $room->Map);
+			$slug = $room->id;
 			//$arrlatlng = json_decode($room->Map,true);
 			$arrImg = explode(';', $room->HinhAnh);
-			$arrmergeLatln[] = ["lat"=> $arrlatlng[0],"lng"=> $arrlatlng[1],"title"=>$room->TieuDe,"address"=> $room->DiaChi,"image"=>$arrImg[0],"phone"=>$room->DienThoaiLienLac];
+			$arrmergeLatln[] = ["slug" => $slug,"lat"=> $arrlatlng[0],"lng"=> $arrlatlng[1],"title"=>$room->TieuDe,"address"=> $room->DiaChi,"image"=>$arrImg[0],"phone"=>$room->DienThoaiLienLac,"owner"=>$room->TenLienHe];
 
 		}
 
@@ -85,9 +87,9 @@
 			(function(phongtro, data){
 				var content = '<div id="iw-container">' +
 				'<img height="200px" width="300" src="img/ThuePhong/'+data.image+'">'+
-				'<a href="phongtro/'+data.slug+'"><div class="iw-title">' + data.title +'</div></a>' +
-				'<p><i class="fas fa-map-marker" style="color:#003352"></i> '+ data.address +'<br>'+
-				'<br>Phone. ' +data.phone +'</div>';
+				'<a href="chitietphong/'+data.slug+'"><div class="iw-title">' + data.title +'</div></a>' +
+				'<p><i class="fas fa-map-marker" style="color:#003352"></i> '+ data.address +'<br>Tên liên lạc: '+ data.owner +'<br>' +
+				'SĐT: ' +data.phone +'</div>';
 
 				google.maps.event.addListener(phongtro, "click", function(e){
 
