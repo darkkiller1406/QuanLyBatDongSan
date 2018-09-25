@@ -283,6 +283,9 @@ type="text/javascript"></script>
       arrlatlng = arrlatlng.split(";");
       var b = new google.maps.LatLng(arrlatlng[0], arrlatlng[1]);
       var a = new google.maps.LatLng(pos['lat'], pos['lng']);
+      var distance = google.maps.geometry.spherical.computeDistanceBetween (a, b);
+      distance = distance/1000;
+      console.log(distance);
       directionsService.route({
         origin: a,
         destination: b,
